@@ -9,9 +9,9 @@ import UIKit
 
 class Loading: UIView {
     
-    private var view: UIView!
     private var activity = UIActivityIndicatorView(style: .whiteLarge)
-
+    let container: UIView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         xibSetup()
@@ -23,47 +23,25 @@ class Loading: UIView {
     }
     
     private func xibSetup(){
-//        view = loadViewFromNib()
-//        view.frame = bounds
+//        view.frame = UIScreen.main.bounds
 //        view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
 //        addSubview(view)
-        loadView()
-        setup()
+        
+        container.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        container.backgroundColor = .black
+        container.alpha = 0.8
+        
+        configureActivity()
     }
     
-    private func loadView() {
-        view = UIView()
-        view.backgroundColor = UIColor(white: 0, alpha: 0.7)
+    private func configureActivity() {
         
+       
         activity.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(activity)
+        
+        activity.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
+        activity.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
         activity.startAnimating()
-        view.addSubview(activity)
-        
-        activity.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activity.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-//        let bundle = Bundle(for: type(of: self))
-//        var identifier = ""
-//        identifier =  NSStringFromClass(self.classForCoder).components(separatedBy: ".").last!
-//        let nib = UINib(nibName: identifier, bundle: bundle)
-//        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-//        return view
-    }
-    
-    private func setup() {
-        self.view.backgroundColor = .black
-        self.view.alpha = 0.8
-        
-        //        self.activity.translatesAutoresizingMaskIntoConstraints = false
-//        let activity = UIActivityIndicatorView(style: .whiteLarge)
-//        activity.center = self.view.center
-//        self.view.addSubview(activity)
-//        activity.startAnimating()
-        
-        //        addConstraint(NSLayoutConstraint(item: self.activity!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        //        addConstraint(NSLayoutConstraint(item: self.activity!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        //        addConstraint(NSLayoutConstraint(item: self.activity!, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        //        self.addSubview(self.activity)
-        
     }
 }

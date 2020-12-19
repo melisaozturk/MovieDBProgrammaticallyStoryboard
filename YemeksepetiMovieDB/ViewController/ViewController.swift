@@ -13,7 +13,8 @@ struct Cells {
 
 class ViewController: UIViewController {
     
-    var tableView = UITableView()
+    private var tableView = UITableView()
+    private var searchBar = UISearchBar()
     
     lazy var viewModel: MovieViewModel = {
         return MovieViewModel()
@@ -22,19 +23,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.configureNavigation()
-        self.configureTableView()
-        self.updateUI()
+        configureNavigation()
+        configuteTableView()
+        configureSearchBar()
+        configureController()
+        updateUI()
         
-    }
-    
-    private func configureTableView() {
-        self.view.addSubview(tableView)
-        tableView.pin(to: self.view)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.backgroundColor = .white
-        tableView.register(MovieCell.self, forCellReuseIdentifier: Cells.movieCell)
     }
     
     private func configureNavigation() {
@@ -47,7 +41,40 @@ class ViewController: UIViewController {
         //        titleLabel.font = UIFont.systemFont(ofSize: 20)
         //        navigationItem.titleView = titleLabel
     }
+       
+    private func configureSearchBar() {
+//        searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
+//        searchBar.delegate = self
+    }
     
+    private func configuteTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .white
+        tableView.register(MovieCell.self, forCellReuseIdentifier: Cells.movieCell)
+    }
+    
+    private func configureController() {
+        
+        self.view.addSubview(tableView)
+        self.view.addSubview(searchBar)
+        
+        searchBar.backgroundColor = .white
+        
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        searchBar.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+    }
+        
     private func updateUI() {
         
         viewModel.showAlertHandler = { [weak self] in
@@ -57,23 +84,17 @@ class ViewController: UIViewController {
             }
         }
         
-        //        viewModel.updateLoadingStatusHandler = { [weak self] in
-        //            guard let self = self else { return }
-        //            DispatchQueue.main.async {
-        //                let isLoading = self.viewModel.isLoading
-        //                if isLoading {
-        //                    UIManager.shared().showLoading(view: self.view)
-        ////                    UIView.animate(withDuration: 0.2, animations: {
-        ////                        self.tableView.alpha = 0.0
-        ////                    })
-        //                }else {
-        //                    UIManager.shared().removeLoading(view: self.view)
-        ////                    UIView.animate(withDuration: 0.2, animations: {
-        ////                        self.tableView.alpha = 1.0
-        ////                    })
-        //                }
-        //            }
-        //        }
+        viewModel.updateLoadingStatusHandler = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let isLoading = self.viewModel.isLoading
+                if isLoading {
+                    UIUtil.shared().showLoading(view: self.view)
+                }else {
+                    UIUtil.shared().removeLoading(view: self.view)
+                }
+            }
+        }
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
@@ -105,7 +126,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.viewModel.userPressed(at: indexPath)
-                
+        
         let detailvc = DetailViewController()
         if let navigation = self.navigationController {
             navigation.pushViewController(detailvc, animated: true)

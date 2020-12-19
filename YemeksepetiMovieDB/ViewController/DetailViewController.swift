@@ -74,23 +74,17 @@ class DetailViewController: UIViewController {
             }
         }
         
-        //        viewModel.updateLoadingStatusHandler = { [weak self] in
-        //            guard let self = self else { return }
-        //            DispatchQueue.main.async {
-        //                let isLoading = self.viewModel.isLoading
-        //                if isLoading {
-        //                    UIManager.shared().showLoading(view: self.view)
-        ////                    UIView.animate(withDuration: 0.2, animations: {
-        ////                        self.tableView.alpha = 0.0
-        ////                    })
-        //                }else {
-        //                    UIManager.shared().removeLoading(view: self.view)
-        ////                    UIView.animate(withDuration: 0.2, animations: {
-        ////                        self.tableView.alpha = 1.0
-        ////                    })
-        //                }
-        //            }
-        //        }
+                viewModel.updateLoadingStatusHandler = { [weak self] in
+                    guard let self = self else { return }
+                    DispatchQueue.main.async {
+                        let isLoading = self.viewModel.isLoading
+                        if isLoading {
+                            UIUtil.shared().showLoading(view: self.view)
+                        }else {
+                            UIUtil.shared().removeLoading(view: self.view)
+                        }
+                    }
+                }
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }

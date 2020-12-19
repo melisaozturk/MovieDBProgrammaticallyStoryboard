@@ -34,7 +34,6 @@ class UIUtil: UIManagerDelegate {
         loading.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         loading.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         loading.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        
     }
     
     func removeLoading(view:UIView){
