@@ -1,0 +1,6 @@
+framework module Pods_YemeksepetiMovieDB {
+  umbrella header "Pods-YemeksepetiMovieDB-umbrella.h"
+
+  export *
+  module * { export * }
+}

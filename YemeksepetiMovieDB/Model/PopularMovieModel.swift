@@ -20,15 +20,15 @@ struct PopularMovieModel: Decodable {
 }
 
 struct PopularResult: Decodable {
-    let popularity: Double
-    let voteCount: Int
-    let video: Bool
-    let posterPath: String
-    let id: Int
-    let adult: Bool
-    let backdropPath: String
-    let originalTitle: String
-    let genreIDS: [Int]
+    let popularity: Double?
+    let voteCount: Int?
+    let video: Bool?
+    let posterPath: String?
+    let id: Int?
+    let adult: Bool?
+    let backdropPath: String?
+    let originalTitle: String?
+    let genreIDS: [Int]?
     let title: String?
     let voteAverage: Double?
     let overview, releaseDate: String?

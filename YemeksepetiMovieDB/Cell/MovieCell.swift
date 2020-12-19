@@ -6,105 +6,53 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieCell: UITableViewCell {
-            
-    let thumbnailImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "taylor_swift_blank_space")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
-    }()
     
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "taylor_swift_profile")
-        imageView.layer.cornerRadius = 22
-        imageView.layer.masksToBounds = true
-        return imageView
-    }()
+    var titleLabel = UILabel()
+    var subtitleTextView = UITextView()
+    var movieImageView = UIImageView()
     
-    let separatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
-        return view
-    }()
+    var cellResultModel : PopularResult? {
+        didSet {
+            titleLabel.text = cellResultModel?.title
+            subtitleTextView.text = cellResultModel?.overview
+            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(cellResultModel!.posterPath!)")
+            movieImageView.kf.setImage(with: url)
+        }
+    }
     
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Taylor Swift - Blank Space"
-        return label
-    }()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupViews()
+    }
     
-    let subtitleTextView: UITextView = {
-        let textView = UITextView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.text = "TaylorSwiftVEVO • 1,604,684,607 views • 2 years ago"
-        textView.textContainerInset = UIEdgeInsets(top: 0, left: -4, bottom: 0, right: 0)
-        textView.textColor = UIColor.lightGray
-        return textView
-    }()
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.setupViews()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     func setupViews() {
-        addSubview(thumbnailImageView)
-        addSubview(separatorView)
-        addSubview(userProfileImageView)
+        addSubview(movieImageView)
         addSubview(titleLabel)
-        addSubview(subtitleTextView)
         
-        addConstraintsWithFormat("H:|-16-[v0]-16-|", views: thumbnailImageView)
         
-        addConstraintsWithFormat("H:|-16-[v0(44)]", views: userProfileImageView)
+        //        movieImageView constraints
         
-        //vertical constraints
-        addConstraintsWithFormat("V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, separatorView)
+        movieImageView.translatesAutoresizingMaskIntoConstraints = false
+        movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        movieImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 12).isActive = true
         
-        addConstraintsWithFormat("H:|[v0]|", views: separatorView)
-        
-//        titleLabel constraints
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .top, relatedBy: .equal, toItem: thumbnailImageView, attribute: .bottom, multiplier: 1, constant: 8))
+        //        titleLabel constraints
 
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
-
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
-
-        addConstraint(NSLayoutConstraint(item: titleLabel, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 20))
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        movieImageView.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20).isActive = true
+        movieImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        movieImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         
-//                subtitleTextView constraints
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .top, relatedBy: .equal, toItem: titleLabel, attribute: .bottom, multiplier: 1, constant: 4))
-                
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .left, relatedBy: .equal, toItem: userProfileImageView, attribute: .right, multiplier: 1, constant: 8))
-        
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .right, relatedBy: .equal, toItem: thumbnailImageView, attribute: .right, multiplier: 1, constant: 0))
-        
-        addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
     }
-       
-}
-
-
-extension UIColor {
-    static func rgb(red: CGFloat, green: CGFloat, blue: CGFloat) -> UIColor {
-        return UIColor(red: red/255, green: green/255, blue: blue/255, alpha: 1)
-    }
-}
-
-extension UIView {
-    func addConstraintsWithFormat(_ format: String, views: UIView...) {
-        var viewsDictionary = [String: UIView]()
-        for (index, view) in views.enumerated() {
-            let key = "v\(index)"
-            view.translatesAutoresizingMaskIntoConstraints = false
-            viewsDictionary[key] = view
-        }
-        
-        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
-    }
+    
 }

@@ -42,7 +42,7 @@ class UIManager: UIManagerDelegate {
         loading.removeFromSuperview()
     }
     
-    func errorHandle(viewController: UIViewController, message: String) {
+    func showMessage(viewController: UIViewController, message: String) {
         let alert = UIAlertController(title: "Uyarı", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: { _ in
             viewController.navigationController?.popViewController(animated: true)
@@ -51,12 +51,4 @@ class UIManager: UIManagerDelegate {
         viewController.present(alert, animated: true, completion: nil)
     }
     
-    func tabbarErrorHandle(viewController: UIViewController, message: String) {
-        let alert = UIAlertController(title: "Uyarı", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: { _ in
-            viewController.dismiss(animated: true, completion: nil)
-        })
-        alert.addAction(action)
-        viewController.present(alert, animated: true, completion: nil)
-    }
 }

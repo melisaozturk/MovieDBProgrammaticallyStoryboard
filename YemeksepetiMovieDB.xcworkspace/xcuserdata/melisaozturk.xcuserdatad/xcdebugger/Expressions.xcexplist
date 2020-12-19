@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "MovieViewModel.getCellModel(at:):MovieViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MovieCell.cellModel.didset:MovieCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieCell.cellResultModel.didset:MovieCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieViewModel.getPopularData():MovieViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieCell.cellModel.didset:MovieCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.tableView(_:numberOfRowsInSection:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel.numberOfCells">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

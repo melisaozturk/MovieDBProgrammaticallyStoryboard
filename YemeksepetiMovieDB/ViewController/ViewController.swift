@@ -7,9 +7,12 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController {
     
-    var viewModel = MovieViewModel()
+    var tableView = UITableView()
+     lazy var viewModel: MovieViewModel = {
+        return MovieViewModel()
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,8 +24,12 @@ class ViewController: UITableViewController {
     }
     
     private func registerTableView() {
-        tableView?.backgroundColor = .white
-        tableView?.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
+        self.view.addSubview(tableView)
+        tableView.pin(to: self.view)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .white
+        tableView.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
     }
     
     private func registerNavigation() {
@@ -37,32 +44,60 @@ class ViewController: UITableViewController {
     }
     
     private func updateUI() {
-        UIManager.shared().showLoading(view: self.view)
-        self.viewModel.getPopularData(completion: { [weak self] response in
-            UIManager.shared().removeLoading(view: self!.view)
-            if let _ = self {
-                self!.tableView.reloadData()
-            }
-        }, completionHandler: { [weak self] error in
-            if let _ = self {
-                UIManager.shared().tabbarErrorHandle(viewController: self!, message: "Bir hata oluştu.")
-            }
-        })
+
+        viewModel.showAlertHandler = { [weak self] in
+            guard let self = self else { return }
+                if let message = self.viewModel.alertMessage {
+                    UIManager.shared().showMessage(viewController: self, message: message)
+                }
+        }
+        
+//        viewModel.updateLoadingStatusHandler = { [weak self] in
+//            guard let self = self else { return }
+//            DispatchQueue.main.async {
+//                let isLoading = self.viewModel.isLoading
+//                if isLoading {
+//                    UIManager.shared().showLoading(view: self.view)
+////                    UIView.animate(withDuration: 0.2, animations: {
+////                        self.tableView.alpha = 0.0
+////                    })
+//                }else {
+//                    UIManager.shared().removeLoading(view: self.view)
+////                    UIView.animate(withDuration: 0.2, animations: {
+////                        self.tableView.alpha = 1.0
+////                    })
+//                }
+//            }
+//        }
+        
+        viewModel.reloadTableViewHandler = { [weak self] in
+            guard let self = self else { return }
+                self.tableView.reloadData()
+        }
+        
+        viewModel.getPopularData()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
-        return cell
-    }
-    
+   
 }
 
 
-
+extension ViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfCells
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        let cellModel = viewModel.getCellModel(at: indexPath)
+        cell.cellResultModel = cellModel[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+}
 
 
