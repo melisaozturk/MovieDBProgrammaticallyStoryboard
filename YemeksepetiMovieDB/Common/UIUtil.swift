@@ -13,14 +13,14 @@ protocol UIManagerDelegate {
     func removeLoading(view:UIView)
 }
 
-class UIManager: UIManagerDelegate {
+class UIUtil: UIManagerDelegate {
     
     private let loading = Loading()
-    private static var sharedInstance: UIManager?
+    private static var sharedInstance: UIUtil?
     
-    public class func shared() -> UIManager {
+    public class func shared() -> UIUtil {
         if sharedInstance == nil {
-            sharedInstance = UIManager()
+            sharedInstance = UIUtil()
         }
         return sharedInstance!
     }

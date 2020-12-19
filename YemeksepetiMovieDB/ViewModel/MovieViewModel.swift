@@ -11,13 +11,13 @@ class MovieViewModel: ApiClient, IViewModel {
     
     var session: URLSession
     
-    var reloadTableViewHandler: (()->())?
+    var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
 
-    var cellModel: [PopularResult] = [PopularResult]() {
+    var popularModel: [PopularResult] = [PopularResult]() {
         didSet {
-            self.reloadTableViewHandler?()
+            self.updateUIHandler?()
         }
     }
 
@@ -34,11 +34,10 @@ class MovieViewModel: ApiClient, IViewModel {
     }
     
     var numberOfCells: Int {
-        return cellModel.count
+        return popularModel.count
     }
     
     var movieID: Int?
-    var popularModel: PopularMovieModel!
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -65,8 +64,7 @@ class MovieViewModel: ApiClient, IViewModel {
             self.isLoading = false
             switch response {
             case .success(let successResponse):
-                self.popularModel = successResponse
-                self.cellModel.append(contentsOf: successResponse.results)
+                self.popularModel.append(contentsOf: successResponse.results)
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
                 #if DEBUG
@@ -78,25 +76,18 @@ class MovieViewModel: ApiClient, IViewModel {
     }
     
     func getCellModel(at indexPath: IndexPath) -> [PopularResult] {
-        return cellModel
+        return popularModel
     }
         
     func userPressed(at indexPath: IndexPath ){
-        let movie = self.popularModel.results[indexPath.row]
-        self.movieID = movie.id
+        let movie = self.popularModel[indexPath.row]
         
-        
-//        if photo.for_sale {
-//            self.isAllowSegue = true
-            
-        
-//        }
-//        else {
-//            self.isAllowSegue = false
-//            self.selectedPhoto = nil
-//            self.alertMessage = "Item detail was not found"
-//        }
-        
+        if movie.id != nil  {
+            self.movieID = movie.id
+        } else {
+            self.movieID = nil
+            self.alertMessage = "Item detail was not found"
+        }
     }
     
 }

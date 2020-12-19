@@ -10,7 +10,7 @@ import Foundation
 protocol IViewModel {
     var session: URLSession { get set }
     
-    var reloadTableViewHandler: (()->())? { get set }
+    var updateUIHandler: (()->())? { get set }
     var showAlertHandler: (()->())? { get set }
     var updateLoadingStatusHandler: (()->())? { get set }
        

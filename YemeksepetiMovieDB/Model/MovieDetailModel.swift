@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct MovieDetailModel: Decodable {
     let adult : Bool?
     let backdropPath : String?
@@ -33,7 +34,7 @@ struct MovieDetailModel: Decodable {
     let voteAverage : Float?
     let voteCount : Int?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case adult = "adult"
         case backdropPath = "backdrop_path"
         case budget = "budget"
@@ -59,6 +60,7 @@ struct MovieDetailModel: Decodable {
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }
+    
 }
 
 struct SpokenLanguage : Decodable {
@@ -67,11 +69,12 @@ struct SpokenLanguage : Decodable {
     let iso6391 : String?
     let name : String?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case englishName = "english_name"
         case iso6391 = "iso_639_1"
         case name = "name"
     }
+    
 }
 
 struct ProductionCompany : Decodable {
@@ -81,12 +84,13 @@ struct ProductionCompany : Decodable {
     let name : String?
     let originCountry : String?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id = "id"
         case logoPath = "logo_path"
         case name = "name"
         case originCountry = "origin_country"
     }
+    
 }
 
 struct ProductionCountry : Decodable {
@@ -94,7 +98,7 @@ struct ProductionCountry : Decodable {
     let iso31661 : String?
     let name : String?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case iso31661 = "iso_3166_1"
         case name = "name"
     }
@@ -105,8 +109,8 @@ struct Genre : Decodable {
     let id : Int?
     let name : String?
     
-    enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
-    }
+    }    
 }

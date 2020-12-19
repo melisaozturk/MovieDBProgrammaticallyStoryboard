@@ -53,7 +53,7 @@ class ViewController: UIViewController {
         viewModel.showAlertHandler = { [weak self] in
             guard let self = self else { return }
             if let message = self.viewModel.alertMessage {
-                UIManager.shared().showMessage(viewController: self, message: message)
+                UIUtil.shared().showMessage(viewController: self, message: message)
             }
         }
         
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
         //            }
         //        }
         
-        viewModel.reloadTableViewHandler = { [weak self] in
+        viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
         }
@@ -95,25 +95,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell , for: indexPath) as! MovieCell
         cell.selectionStyle = .none
-        let cellModel = viewModel.getCellModel(at: indexPath)
-        cell.cellResultModel = cellModel[indexPath.row]
+        cell.cellResultModel = viewModel.popularModel[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.viewModel.userPressed(at: indexPath)
-        
+                
         let detailvc = DetailViewController()
         if let navigation = self.navigationController {
             navigation.pushViewController(detailvc, animated: true)
             detailvc.movieID = self.viewModel.movieID
         }
-        //        self.detailVC?.gotoDetail(viewModel: self.viewModel)
-        
     }
     
     

@@ -11,13 +11,13 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     
     var session: URLSession
     
-    var reloadTableViewHandler: (()->())?
+    var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
     
-    var cellModel: [PopularResult] = [PopularResult]() {
+    var movieDetailModel: MovieDetailModel? {
         didSet {
-            self.reloadTableViewHandler?()
+            self.updateUIHandler?()
         }
     }
 
@@ -32,14 +32,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             self.showAlertHandler?()
         }
     }
-    
-    var numberOfCells: Int {
-        return cellModel.count
-    }
-    
-    var selectedMovie: PopularResult?
-
-    var movieDetailModel: MovieDetailModel!
+        
 //    var movieCreditsModel: MovieCreditsModel!
         
     init(configuration: URLSessionConfiguration) {
@@ -50,29 +43,29 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         self.init(configuration: .default)
     }
     
-    func getMovieDetailData(id: Int, completion: @escaping (MovieDetailModel) -> Void, completionHandler: @escaping (String) -> Void) {
+    func getMovieDetailData(id: Int) {
         
         let endpoint = Endpoint.movie_detail(id)
         let request = endpoint.request
         #if DEBUG
         print(request)
         #endif
-        
+        self.isLoading = true
+
         fetch(with: request, decode: { json -> MovieDetailModel? in
             guard let feedResult = json as? MovieDetailModel else { return  nil }
             return feedResult
         }, completion: { [weak self] response in
             guard let self = self else { return }
-            
+            self.isLoading = false
             switch response {
             case .success(let successResponse):
                 self.movieDetailModel = successResponse
-                completion(successResponse)
-            case .failure(_):
+            case .failure(let error):
+                self.alertMessage = error.localizedDescription
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
-                completionHandler("Error")
             }
         })
     }

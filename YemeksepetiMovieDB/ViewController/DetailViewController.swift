@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailViewController: UIViewController {
     
@@ -14,10 +15,13 @@ class DetailViewController: UIViewController {
     
     var movieID: Int?
     
+    lazy var viewModel: MovieDetailViewModel = {
+        return MovieDetailViewModel()
+    }()
+        
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.backgroundColor = .cyan
+        scroll.backgroundColor = .white
         return scroll
     }()
     
@@ -25,6 +29,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureController()
         configureConstraints()
+        updateUI()
     }
     
     private func configureController() {
@@ -48,14 +53,52 @@ class DetailViewController: UIViewController {
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         movieImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50).isActive = true
-        movieImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        movieImageView.heightAnchor.constraint(equalToConstant: 400).isActive = true
         movieImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
         movieImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 20).isActive = true
+        movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 12).isActive = true
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.topAnchor.constraint(equalTo: movieImageView.bottomAnchor, constant: 50).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 20).isActive = true
+    }
+    
+    private func updateUI() {
+        
+        viewModel.showAlertHandler = { [weak self] in
+            guard let self = self else { return }
+            if let message = self.viewModel.alertMessage {
+                UIUtil.shared().showMessage(viewController: self, message: message)
+            }
+        }
+        
+        //        viewModel.updateLoadingStatusHandler = { [weak self] in
+        //            guard let self = self else { return }
+        //            DispatchQueue.main.async {
+        //                let isLoading = self.viewModel.isLoading
+        //                if isLoading {
+        //                    UIManager.shared().showLoading(view: self.view)
+        ////                    UIView.animate(withDuration: 0.2, animations: {
+        ////                        self.tableView.alpha = 0.0
+        ////                    })
+        //                }else {
+        //                    UIManager.shared().removeLoading(view: self.view)
+        ////                    UIView.animate(withDuration: 0.2, animations: {
+        ////                        self.tableView.alpha = 1.0
+        ////                    })
+        //                }
+        //            }
+        //        }
+        
+        viewModel.updateUIHandler = { [weak self] in
+            guard let self = self else { return }
+            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath!)")
+            self.movieImageView.kf.setImage(with: url)
+            self.titleLabel.text = self.viewModel.movieDetailModel!.title
+        }
+        
+        viewModel.getMovieDetailData(id: self.movieID!)
     }
 }
