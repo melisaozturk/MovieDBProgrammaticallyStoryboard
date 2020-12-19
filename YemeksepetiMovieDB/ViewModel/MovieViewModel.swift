@@ -7,21 +7,20 @@
 
 import Foundation
 
-class MovieViewModel: ApiClient {
+class MovieViewModel: ApiClient, IViewModel {    
     
-    let session: URLSession
-    var popularModel: PopularMovieModel!
+    var session: URLSession
     
     var reloadTableViewHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
-    
-    private var cellModel: [PopularResult] = [PopularResult]() {
+
+    var cellModel: [PopularResult] = [PopularResult]() {
         didSet {
             self.reloadTableViewHandler?()
         }
     }
-    
+
     var isLoading: Bool = false {
         didSet {
             self.updateLoadingStatusHandler?()
@@ -37,6 +36,9 @@ class MovieViewModel: ApiClient {
     var numberOfCells: Int {
         return cellModel.count
     }
+    
+    var selectedMovie: PopularResult?
+    var popularModel: PopularMovieModel!
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -78,4 +80,22 @@ class MovieViewModel: ApiClient {
     func getCellModel(at indexPath: IndexPath) -> [PopularResult] {
         return cellModel
     }
+        
+    func userPressed(at indexPath: IndexPath ){
+        let movie = self.popularModel.results[indexPath.row]
+        self.selectedMovie = movie
+        
+//        if photo.for_sale {
+//            self.isAllowSegue = true
+            
+        
+//        }
+//        else {
+//            self.isAllowSegue = false
+//            self.selectedPhoto = nil
+//            self.alertMessage = "Item detail was not found"
+//        }
+        
+    }
+    
 }
