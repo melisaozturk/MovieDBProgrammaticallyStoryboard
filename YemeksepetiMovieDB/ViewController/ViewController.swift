@@ -7,11 +7,25 @@
 
 import UIKit
 
-class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-
+class ViewController: UITableViewController {
+    
+    var viewModel = MovieViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.registerNavigation()
+        self.registerTableView()
+        self.updateUI()
+        
+    }
+    
+    private func registerTableView() {
+        tableView?.backgroundColor = .white
+        tableView?.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
+    }
+    
+    private func registerNavigation() {
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
         
@@ -20,29 +34,30 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.textColor = .white
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
-        
-        collectionView?.backgroundColor = .white
-        
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
     }
     
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    private func updateUI() {
+        UIManager.shared().showLoading(view: self.view)
+        self.viewModel.getPopularData(completion: { [weak self] response in
+            UIManager.shared().removeLoading(view: self!.view)
+            if let _ = self {
+                self!.tableView.reloadData()
+            }
+        }, completionHandler: { [weak self] error in
+            if let _ = self {
+                UIManager.shared().tabbarErrorHandle(viewController: self!, message: "Bir hata oluştu.")
+            }
+        })
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath)
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = (view.frame.width - 16 - 16) * 9 / 16
-        return CGSize(width: view.frame.width, height: height + 16 + 68)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
     }
     
 }
