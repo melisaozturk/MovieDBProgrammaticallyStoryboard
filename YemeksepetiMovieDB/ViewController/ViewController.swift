@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct Cells {
+    static let movieCell = "MovieCell"
+}
+
 class ViewController: UIViewController {
     
     var tableView = UITableView()
@@ -29,7 +33,7 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .white
-        tableView.register(MovieCell.self, forCellReuseIdentifier: "MovieCell")
+        tableView.register(MovieCell.self, forCellReuseIdentifier: Cells.movieCell)
     }
     
     private func registerNavigation() {
@@ -77,7 +81,6 @@ class ViewController: UIViewController {
         
         viewModel.getPopularData()
     }
-    
    
 }
 
@@ -89,7 +92,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell , for: indexPath) as! MovieCell
         let cellModel = viewModel.getCellModel(at: indexPath)
         cell.cellResultModel = cellModel[indexPath.row]
         return cell

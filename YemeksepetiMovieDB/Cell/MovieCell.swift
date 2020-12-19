@@ -10,9 +10,9 @@ import Kingfisher
 
 class MovieCell: UITableViewCell {
     
-    var titleLabel = UILabel()
-    var subtitleTextView = UITextView()
-    var movieImageView = UIImageView()
+    private var titleLabel = UILabel()
+    private var subtitleTextView = UITextView()
+    private var movieImageView = UIImageView()
     
     var cellResultModel : PopularResult? {
         didSet {
@@ -32,12 +32,11 @@ class MovieCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupViews() {
+    private func setupViews() {
         addSubview(movieImageView)
         addSubview(titleLabel)
         
-        
-        //        movieImageView constraints
+        //                movieImageView constraints
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -45,13 +44,13 @@ class MovieCell: UITableViewCell {
         movieImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 12).isActive = true
         
-        //        titleLabel constraints
-
+        //                titleLabel constraints
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        movieImageView.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20).isActive = true
-        movieImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        movieImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
         
     }
     
