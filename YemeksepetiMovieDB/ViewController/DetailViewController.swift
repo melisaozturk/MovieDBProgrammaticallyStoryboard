@@ -98,7 +98,15 @@ class DetailViewController: UIViewController {
             self.movieImageView.kf.setImage(with: url)
             self.titleLabel.text = self.viewModel.movieDetailModel!.title
         }
+       
+        viewModel.updateUIHandlerCredits = { [weak self] in
+            guard let _ = self else { return }
+//            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath!)")
+//            self.movieImageView.kf.setImage(with: url)
+//            self.titleLabel.text = self.viewModel.movieDetailModel!.title
+        }
         
         viewModel.getMovieDetailData(id: self.movieID!)
+        viewModel.getMovieCreditsData(id: self.movieID!)
     }
 }
