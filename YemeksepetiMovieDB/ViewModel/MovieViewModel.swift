@@ -37,7 +37,7 @@ class MovieViewModel: ApiClient, IViewModel {
         return cellModel.count
     }
     
-    var selectedMovie: PopularResult?
+    var movieID: Int?
     var popularModel: PopularMovieModel!
     
     init(configuration: URLSessionConfiguration) {
@@ -83,7 +83,8 @@ class MovieViewModel: ApiClient, IViewModel {
         
     func userPressed(at indexPath: IndexPath ){
         let movie = self.popularModel.results[indexPath.row]
-        self.selectedMovie = movie
+        self.movieID = movie.id
+        
         
 //        if photo.for_sale {
 //            self.isAllowSegue = true

@@ -110,6 +110,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let detailvc = DetailViewController()
         if let navigation = self.navigationController {
             navigation.pushViewController(detailvc, animated: true)
+            detailvc.movieID = self.viewModel.movieID
         }
         //        self.detailVC?.gotoDetail(viewModel: self.viewModel)
         

@@ -25,7 +25,7 @@ class MovieCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupViews()
+        configureConstraints()
         configureUI()
     }
     
@@ -42,7 +42,7 @@ class MovieCell: UITableViewCell {
         titleLabel.adjustsFontSizeToFitWidth = true
     }
     
-    private func setupViews() {
+    private func configureConstraints() {
         addSubview(movieImageView)
         addSubview(titleLabel)
         
