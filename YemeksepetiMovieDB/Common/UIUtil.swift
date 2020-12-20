@@ -25,8 +25,23 @@ class UIUtil: UIManagerDelegate {
         return sharedInstance!
     }
     
-    
+    let activityView = UIActivityIndicatorView(style: .whiteLarge)
+    let container: UIView = UIView()
+
     func showLoading(view: UIView) {
+//        view.addSubview(container)
+//        container.addSubview(activityView)
+//
+//        container.frame.size = CGSize(width: 80, height: 80) // Set X and Y whatever you want
+//        container.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+//
+//        container.backgroundColor = .black
+//        container.alpha = 0.8
+//
+//        activityView.center = view.center
+//        activityView.startAnimating()
+        
         view.addSubview(self.loading)
         view.isUserInteractionEnabled = false
         loading.translatesAutoresizingMaskIntoConstraints = false
@@ -38,6 +53,7 @@ class UIUtil: UIManagerDelegate {
     
     func removeLoading(view:UIView){
         view.isUserInteractionEnabled = true
+//        container.removeFromSuperview()
         loading.removeFromSuperview()
     }
     

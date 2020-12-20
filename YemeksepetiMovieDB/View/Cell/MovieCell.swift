@@ -34,6 +34,9 @@ class MovieCell: UITableViewCell {
     }
     
     private func configureUI() {
+        self.contentView.layer.borderWidth = 1.0
+        self.contentView.layer.borderColor = UIColor.gray.cgColor
+        
         movieImageView.layer.cornerRadius = 10
         movieImageView.clipsToBounds = true
         movieImageView.contentMode = .scaleAspectFill

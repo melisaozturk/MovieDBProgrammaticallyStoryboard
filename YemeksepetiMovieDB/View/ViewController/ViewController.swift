@@ -23,35 +23,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureNavigation()
+        configureUI()
         configuteTableView()
-        configureSearchBar()
         configureController()
         updateUI()
         
     }
     
-    private func configureNavigation() {
+    private func configureUI() {
         navigationItem.title = "Home"
-        
-        //        navigationController?.navigationBar.isTranslucent = false
-        
-        //        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
-        //        titleLabel.text = "Home"
-        //        titleLabel.textColor = .white
-        //        titleLabel.font = UIFont.systemFont(ofSize: 20)
-        //        navigationItem.titleView = titleLabel
-    }
-    
-    private func configureSearchBar() {
-        //        searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
         self.searchBar.delegate = self
-        
+        self.view.backgroundColor = UIColor.gray
     }
     
     private func configuteTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         tableView.backgroundColor = .white
         tableView.register(MovieCell.self, forCellReuseIdentifier: Cells.movieCell)
     }
@@ -87,12 +75,10 @@ class ViewController: UIViewController {
         
         viewModel.updateLoadingStatusHandler = { [weak self] in
             guard let self = self else { return }
-            DispatchQueue.main.async {
                 if self.viewModel.isLoading {
                     UIUtil.shared().showLoading(view: self.view)
                 }else {
                     UIUtil.shared().removeLoading(view: self.view)
-                }
             }
         }
         

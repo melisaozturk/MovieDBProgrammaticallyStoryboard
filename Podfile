@@ -6,7 +6,7 @@ target 'YemeksepetiMovieDB' do
   use_frameworks!
 
   # Pods for YemeksepetiMovieDB
-  pod 'Kingfisher', '~> 4.0'
+  pod 'Kingfisher'
 
   target 'YemeksepetiMovieDBTests' do
     inherit! :search_paths

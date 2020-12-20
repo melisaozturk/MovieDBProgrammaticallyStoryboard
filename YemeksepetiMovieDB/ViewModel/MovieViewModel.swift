@@ -137,10 +137,9 @@ class MovieViewModel: ApiClient, IViewModel {
     }
     
     func userPressed(at indexPath: IndexPath ){
-        let movie = self.movieModel[indexPath.row]
-        let filteredMovie = self.filteredData[indexPath.row]
-        
+              
         if self.isActive {
+            let filteredMovie = self.filteredData[indexPath.row]
             if filteredMovie.id != nil  {
                 self.movieID = filteredMovie.id
             } else {
@@ -148,6 +147,7 @@ class MovieViewModel: ApiClient, IViewModel {
                 self.alertMessage = "Movie detail was not found"
             }
         } else {
+            let movie = self.movieModel[indexPath.row]
             if movie.id != nil  {
                 self.movieID = movie.id
             } else {
