@@ -302,8 +302,8 @@
             filePath = "YemeksepetiMovieDB/Common/UIUtil.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "showLoading(view:)"
             landmarkType = "7">
          </BreakpointContent>
