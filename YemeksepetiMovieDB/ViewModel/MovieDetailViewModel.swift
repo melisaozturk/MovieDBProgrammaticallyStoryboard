@@ -17,13 +17,13 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     
     var updateUIHandlerCredits: (()->())?
     
-    var movieDetailModel: MovieDetailModel? {
+    var movieDetailModel: MovieDetailModel! {
         didSet {
             self.updateUIHandler?()
         }
     }
 
-    var movieCreditsModel: [MovieCast]? {
+    var movieCreditsModel: [MovieCast]! {
         didSet {
             self.updateUIHandlerCredits?()
         }
@@ -40,7 +40,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             self.showAlertHandler?()
         }
     }
-                
+             
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
     }

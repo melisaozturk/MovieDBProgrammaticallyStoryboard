@@ -64,7 +64,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureController()
         configureConstraints()
-        configureCollectionView()
         updateUI()
     }
     
@@ -83,10 +82,6 @@ class DetailViewController: UIViewController {
         textViewOverView.isSelectable = false
         textViewOverView.textAlignment = .left
         textViewOverView.font = UIFont(name: ".SFUI-Regular", size: 17)
-    }
-    
-    private func configureCollectionView() {
-        
     }
     
     private func configureConstraints() {
@@ -213,19 +208,12 @@ class DetailViewController: UIViewController {
         // cast'i göstermek için collection vb oluştur
         //        viewModel.updateUIHandlerCredits = { [weak self] in
         //            guard let self = self else { return }
-        //            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieCreditsModel.posterPath!)")
-        //            self.movieImageView.kf.setImage(with: url)
-        //            self.titleLabel.text = self.viewModel.movieCreditsModel!.title
+//        collectionView.reloadData()
         //        }
         
         viewModel.getMovieDetailData(id: self.movieID!)
         //        viewModel.getMovieCreditsData(id: self.movieID!)
     
     }
-}
-
-
-extension DetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-    
 }
 

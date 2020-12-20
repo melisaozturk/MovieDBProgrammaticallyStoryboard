@@ -7,69 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "65E35CFD-5C9B-4EA2-8AC1-6A6208563410"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "65E35CFD-5C9B-4EA2-8AC1-6A6208563410 - a49f8b231b28572d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in YemeksepetiMovieDB.DetailViewController.(updateUI in _B5B82597A0E6B75BADF80F52D04BBCF7)() -&gt; ()"
-                  moduleName = "YemeksepetiMovieDB"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/melisaozturk/devel/iOS/YemeksepetiMovieDB/YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "10872">
-               </Location>
-               <Location
-                  uuid = "65E35CFD-5C9B-4EA2-8AC1-6A6208563410 - 7c84f9b37abaf9e6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #7 (Swift.Character) -&gt; Swift.String in closure #3 () -&gt; () in YemeksepetiMovieDB.DetailViewController.(updateUI in _B5B82597A0E6B75BADF80F52D04BBCF7)() -&gt; ()"
-                  moduleName = "YemeksepetiMovieDB"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/melisaozturk/devel/iOS/YemeksepetiMovieDB/YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "45">
-               </Location>
-               <Location
-                  uuid = "65E35CFD-5C9B-4EA2-8AC1-6A6208563410 - 3bf98e5d70b563f3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #8 (Swift.String, Swift.String) -&gt; Swift.String in closure #3 () -&gt; () in YemeksepetiMovieDB.DetailViewController.(updateUI in _B5B82597A0E6B75BADF80F52D04BBCF7)() -&gt; ()"
-                  moduleName = "YemeksepetiMovieDB"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/melisaozturk/devel/iOS/YemeksepetiMovieDB/YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "35">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "0A04880F-57C6-4763-B183-50E054C00A8D"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -157,8 +94,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,8 +110,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -189,8 +126,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "configureConstraints()"
             landmarkType = "7">
          </BreakpointContent>
