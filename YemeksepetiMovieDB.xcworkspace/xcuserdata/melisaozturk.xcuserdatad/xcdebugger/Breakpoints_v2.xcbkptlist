@@ -14,8 +14,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "updateUI()"
             landmarkType = "7">
             <Locations>
@@ -77,8 +77,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,9 +173,9 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "configureConstraints()"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

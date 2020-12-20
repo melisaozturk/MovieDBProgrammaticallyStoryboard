@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 500)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 300)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -75,73 +75,49 @@ class DetailViewController: UIViewController {
         self.view.addSubview(scrollView)
         scrollView.addSubview(containerView)
         
-        containerView.addSubview(labelTitle)
         containerView.addSubview(imageViewMovie)
-        containerView.addSubview(labelOriginalTitle)
-        containerView.addSubview(labelRuntime)
-        containerView.addSubview(labelPopularity)
-        containerView.addSubview(labelStatus)
-        containerView.addSubview(labelGenre)
-        containerView.addSubview(labelOriginalLanguage)
-        containerView.addSubview(labelReleaseDate)
-        containerView.addSubview(labelSpokenLanguages)
-        containerView.addSubview(labelAdult)
         containerView.addSubview(textViewOverView)
-        
-//        containerView.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-//        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         imageViewMovie.translatesAutoresizingMaskIntoConstraints = false
         imageViewMovie.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         imageViewMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
         imageViewMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         imageViewMovie.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-                
         
-        labelTitle.translatesAutoresizingMaskIntoConstraints = false
-        labelTitle.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 50).isActive = true
-        labelTitle.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        labelTitle.heightAnchor.constraint(equalToConstant: 21).isActive = true
-
-        labelOriginalTitle.translatesAutoresizingMaskIntoConstraints = false
-        labelOriginalTitle.topAnchor.constraint(equalTo: labelTitle.bottomAnchor).isActive = true
-        labelOriginalTitle.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor).isActive = true
-        labelOriginalTitle.trailingAnchor.constraint(equalTo: labelTitle.trailingAnchor).isActive = true
-        labelOriginalTitle.heightAnchor.constraint(equalToConstant: 21).isActive = true
+        let stackViewContainer = UIStackView()
+        stackViewContainer.axis = .vertical
+        stackViewContainer.alignment = .leading
+        stackViewContainer.spacing = 10
+        stackViewContainer.contentMode = .scaleToFill
+        containerView.addSubview(stackViewContainer)
 
         
-        let stackViewStatus = UIStackView()
-        stackViewStatus.axis = .vertical
-        stackViewStatus.alignment = .leading
-        stackViewStatus.distribution = .equalSpacing
-        stackViewStatus.contentMode = .scaleToFill
-        containerView.addSubview(stackViewStatus)
-
-        stackViewStatus.addArrangedSubview(labelTitle)
-        stackViewStatus.addArrangedSubview(labelOriginalTitle)
-        stackViewStatus.addArrangedSubview(labelRuntime)
-        stackViewStatus.addArrangedSubview(labelPopularity)
-        stackViewStatus.addArrangedSubview(labelAdult)
-        stackViewStatus.addArrangedSubview(labelGenre)
-        stackViewStatus.addArrangedSubview(labelStatus)
-        stackViewStatus.addArrangedSubview(labelGenre)
-        
-        stackViewStatus.translatesAutoresizingMaskIntoConstraints = false
-        stackViewStatus.topAnchor.constraint(equalTo: labelOriginalTitle.bottomAnchor, constant: 20).isActive = true
-        stackViewStatus.leadingAnchor.constraint(equalTo: labelOriginalTitle.leadingAnchor).isActive = true
-        stackViewStatus.trailingAnchor.constraint(equalTo: labelOriginalTitle.trailingAnchor).isActive = true
+        stackViewContainer.addArrangedSubview(labelTitle)
+        stackViewContainer.addArrangedSubview(labelOriginalTitle)
+        stackViewContainer.addArrangedSubview(labelRuntime)
+        stackViewContainer.addArrangedSubview(labelPopularity)
+        stackViewContainer.addArrangedSubview(labelStatus)
+        stackViewContainer.addArrangedSubview(labelGenre)
+        stackViewContainer.addArrangedSubview(labelOriginalLanguage)
+        stackViewContainer.addArrangedSubview(labelReleaseDate)
+        stackViewContainer.addArrangedSubview(labelSpokenLanguages)
+        stackViewContainer.addArrangedSubview(labelAdult)
+        stackViewContainer.addArrangedSubview(labelVoteAverage)
+        stackViewContainer.addArrangedSubview(labelVoteCount)
+        stackViewContainer.addArrangedSubview(labelProductionCompanies)
+        stackViewContainer.addArrangedSubview(labelProductionCountries)
         
         
+        stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        stackViewContainer.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 20).isActive = true
+        stackViewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+        stackViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
         
         
         textViewOverView.translatesAutoresizingMaskIntoConstraints = false
-        textViewOverView.topAnchor.constraint(equalTo: stackViewStatus.bottomAnchor, constant: 10).isActive = true
+        textViewOverView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 10).isActive = true
         textViewOverView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         textViewOverView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
-//        textViewOverView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
     }
     
     private func updateUI() {
