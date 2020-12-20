@@ -15,7 +15,7 @@ class MovieCell: UITableViewCell {
     
     var cellResultModel: MovieResult? {
         didSet {
-            titleLabel.text = cellResultModel?.title
+            titleLabel.text = cellResultModel!.title
             let url = URL(string: "http://image.tmdb.org/t/p/w500//\(cellResultModel!.posterPath ?? "")")
             movieImageView.kf.setImage(with: url)
         }
@@ -35,8 +35,6 @@ class MovieCell: UITableViewCell {
         self.contentView.layer.borderWidth = 1.0
         self.contentView.layer.borderColor = UIColor.gray.cgColor
         
-        movieImageView.layer.cornerRadius = 10
-        movieImageView.clipsToBounds = true
         movieImageView.contentMode = .scaleAspectFit
 
         titleLabel.numberOfLines = 0

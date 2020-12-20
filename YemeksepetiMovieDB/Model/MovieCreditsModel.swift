@@ -13,15 +13,15 @@ struct MovieCreditsModel: Decodable {
 }
 
 struct MovieCast: Decodable {
-    let adult: Bool
-    let gender, id: Int
-    let knownForDepartment: MovieDepartment
+    let adult: Bool?
+    let gender, id: Int?
+    let knownForDepartment: MovieDepartment?
     let name, originalName: String?
-    let popularity: Double
+    let popularity: Double?
     let profilePath: String?
     let castID: Int?
     let character: String?
-    let creditID: String
+    let creditID: String?
     let order: Int?
     let department: MovieDepartment?
     let job: String?

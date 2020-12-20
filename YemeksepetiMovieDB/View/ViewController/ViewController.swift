@@ -9,6 +9,7 @@ import UIKit
 
 struct Cells {
     static let movieCell = "MovieCell"
+    static let castCell = "CastCell"
 }
 
 class ViewController: UIViewController {
@@ -121,10 +122,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
         self.viewModel.userPressed(at: indexPath)
         
-        let detailvc = DetailViewController()
+        let detailVC = DetailViewController()
         if let navigation = self.navigationController {
-            navigation.pushViewController(detailvc, animated: true)
-            detailvc.movieID = self.viewModel.movieID
+            navigation.pushViewController(detailVC, animated: true)
+            detailVC.movieID = self.viewModel.movieID
         }
     }
 }

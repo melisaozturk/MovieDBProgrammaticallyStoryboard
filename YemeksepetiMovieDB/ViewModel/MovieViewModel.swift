@@ -91,7 +91,7 @@ class MovieViewModel: ApiClient, IViewModel {
             case .success(let successResponse):
                 self.movieModel.append(contentsOf: successResponse.results)
             case .failure(_):
-                self.alertMessage = "Sonuç bulunamadı."
+                self.alertMessage = "Movie data was not found."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
@@ -121,7 +121,7 @@ class MovieViewModel: ApiClient, IViewModel {
                     self.filterModel.append(contentsOf: successResponse.results)
                     self.filterData(searchKey: searchKey)
                 case .failure(_):
-                    self.alertMessage = "Sonuç bulunamadı."
+                    self.alertMessage = "Search data was not found."
                     #if DEBUG
                     print("Data Fetch Failed")
                     #endif

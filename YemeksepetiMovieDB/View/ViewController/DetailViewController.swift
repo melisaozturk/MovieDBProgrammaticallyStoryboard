@@ -28,6 +28,13 @@ class DetailViewController: UIViewController {
     private var textViewOverView = UITextView()
     
     var movieID: Int?
+    lazy var layout: UICollectionViewFlowLayout = {
+        var layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        return layout
+    }()
+    
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.layout)
     
     lazy var stackViewContainer: UIStackView = {
         var stackViewContainer = UIStackView()
@@ -43,7 +50,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 250)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 500)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -64,6 +71,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureController()
         configureConstraints()
+        configureCollectionView()
         updateUI()
     }
     
@@ -84,9 +92,18 @@ class DetailViewController: UIViewController {
         textViewOverView.font = UIFont(name: ".SFUI-Regular", size: 17)
     }
     
+    private func configureCollectionView() {
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self                
+        collectionView.backgroundColor = .white
+        
+        collectionView.register(CastCell.self, forCellWithReuseIdentifier: Cells.castCell)
+    }
+    
     private func configureConstraints() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(containerView)
+        scrollView.addSubview(collectionView)
         
         containerView.addSubview(imageViewMovie)
         
@@ -119,7 +136,13 @@ class DetailViewController: UIViewController {
         stackViewContainer.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 20).isActive = true
         stackViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         stackViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
-                
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 20).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
     
     private func updateUI() {
@@ -204,16 +227,46 @@ class DetailViewController: UIViewController {
                 }
                 self.labelGenre.text = "Genres: \(itemString)"
             }
+                        
         }
-        // cast'i göstermek için collection vb oluştur
-        //        viewModel.updateUIHandlerCredits = { [weak self] in
-        //            guard let self = self else { return }
-//        collectionView.reloadData()
-        //        }
+        
+        viewModel.updateUIHandlerCredits = { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+        }
         
         viewModel.getMovieDetailData(id: self.movieID!)
-        //        viewModel.getMovieCreditsData(id: self.movieID!)
+        viewModel.getMovieCreditsData(id: self.movieID!)
     
+    }
+}
+
+
+extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.viewModel.numberOfCells
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.castCell, for: indexPath) as! CastCell
+        cell.cellResultModel = self.viewModel.movieCreditsModel[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.userPressedCast(at: indexPath)
+        
+        let castVC = CastViewController()
+        if let navigation = self.navigationController {
+            navigation.pushViewController(castVC, animated: true)
+            castVC.castID = self.viewModel.castID
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: self.collectionView.frame.width / 3, height: self.collectionView.frame.height)
     }
 }
 

@@ -16,14 +16,15 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     var updateLoadingStatusHandler: (()->())?
     
     var updateUIHandlerCredits: (()->())?
-    
+    var castID: Int?
+
     var movieDetailModel: MovieDetailModel! {
         didSet {
             self.updateUIHandler?()
         }
     }
 
-    var movieCreditsModel: [MovieCast]! {
+    var movieCreditsModel: [MovieCast] = [MovieCast]() {
         didSet {
             self.updateUIHandlerCredits?()
         }
@@ -40,7 +41,11 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             self.showAlertHandler?()
         }
     }
-             
+    
+    var numberOfCells: Int {
+        return movieCreditsModel.count
+    }
+                
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
     }
@@ -68,7 +73,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             case .success(let successResponse):
                 self.movieDetailModel = successResponse
             case .failure(_):
-                self.alertMessage = "Sonuç bulunamadı."
+                self.alertMessage = "Movie detail was not found."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
@@ -93,14 +98,24 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             self.isLoading = false
             switch response {
             case .success(let successResponse):
-                self.movieCreditsModel = successResponse.cast
+                self.movieCreditsModel = successResponse.cast!
             case .failure(_):
-                self.alertMessage = "Sonuç bulunamadı."
+                self.alertMessage = "Cast data was not found."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
             }
         })
+    }
+ 
+    func userPressedCast(at indexPath: IndexPath ){
+        let cast = self.movieCreditsModel[indexPath.row]
+        if cast.id != nil  {
+            self.castID = cast.id
+        } else {
+            self.castID = nil
+            self.alertMessage = "Cast detail was not found."
+        }
     }
     
 }
