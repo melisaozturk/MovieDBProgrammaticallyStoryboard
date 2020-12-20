@@ -134,8 +134,11 @@ class DetailViewController: UIViewController {
         stackViewStatus.leadingAnchor.constraint(equalTo: labelOriginalTitle.leadingAnchor).isActive = true
         stackViewStatus.trailingAnchor.constraint(equalTo: labelOriginalTitle.trailingAnchor).isActive = true
         
+        
+        
+        
         textViewOverView.translatesAutoresizingMaskIntoConstraints = false
-        textViewOverView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
+        textViewOverView.topAnchor.constraint(equalTo: labelOriginalTitle.bottomAnchor, constant: 10).isActive = true
         textViewOverView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         textViewOverView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
 //        textViewOverView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
