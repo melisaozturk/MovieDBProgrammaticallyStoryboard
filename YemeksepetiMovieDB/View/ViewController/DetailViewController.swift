@@ -41,7 +41,7 @@ class DetailViewController: UIViewController {
         var stackViewContainer = UIStackView()
         stackViewContainer.axis = .vertical
         stackViewContainer.alignment = .leading
-        stackViewContainer.distribution = .equalSpacing
+        stackViewContainer.distribution = .fillProportionally
         stackViewContainer.spacing = 10
         stackViewContainer.contentMode = .scaleToFill
         return stackViewContainer
