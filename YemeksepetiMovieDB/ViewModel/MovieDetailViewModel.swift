@@ -23,7 +23,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         }
     }
 
-    var movieCreditsModel: MovieCreditsModel? {
+    var movieCreditsModel: [MovieCast]? {
         didSet {
             self.updateUIHandlerCredits?()
         }
@@ -93,7 +93,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             self.isLoading = false
             switch response {
             case .success(let successResponse):
-                self.movieCreditsModel = successResponse
+                self.movieCreditsModel = successResponse.cast
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
                 #if DEBUG

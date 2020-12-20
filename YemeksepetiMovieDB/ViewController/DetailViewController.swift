@@ -88,19 +88,20 @@ class DetailViewController: UIViewController {
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
-            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath!)")
+            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath ?? "")")
             self.movieImageView.kf.setImage(with: url)
             self.titleLabel.text = self.viewModel.movieDetailModel!.title
         }
-       
-        viewModel.updateUIHandlerCredits = { [weak self] in
-            guard let _ = self else { return }
-//            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath!)")
+
+        // cast'i göstermek için collection vb oluştur
+//        viewModel.updateUIHandlerCredits = { [weak self] in
+//            guard let self = self else { return }
+//            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieCreditsModel.posterPath!)")
 //            self.movieImageView.kf.setImage(with: url)
-//            self.titleLabel.text = self.viewModel.movieDetailModel!.title
-        }
+//            self.titleLabel.text = self.viewModel.movieCreditsModel!.title
+//        }
         
         viewModel.getMovieDetailData(id: self.movieID!)
-        viewModel.getMovieCreditsData(id: self.movieID!)
+//        viewModel.getMovieCreditsData(id: self.movieID!)
     }
 }

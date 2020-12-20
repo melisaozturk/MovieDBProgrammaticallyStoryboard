@@ -145,8 +145,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.count > 2 {
-            
+
+//        if !searchText.isEmpty {
             viewModel.showAlertHandler = { [weak self] in
                 guard let self = self else { return }
                 if let message = self.viewModel.alertMessage {
@@ -171,6 +171,5 @@ extension ViewController: UISearchBarDelegate {
             }
             
             self.viewModel.getSearchMovies(searchKey: searchText)
-        }
-    }
+    }    
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class MovieViewModel: ApiClient, IViewModel {
-        
+    
     
     var session: URLSession
     
@@ -31,7 +31,7 @@ class MovieViewModel: ApiClient, IViewModel {
             self.updateUIHandler?()
         }
     }
- 
+    
     var filterModel: [MovieResult] = [MovieResult]() {
         didSet {
             self.updateUIHandler?()
@@ -40,7 +40,7 @@ class MovieViewModel: ApiClient, IViewModel {
     
     var isActive: Bool = false {
         didSet {
-            self.updateFilterStatus?()
+            self.updateUIHandler?()
         }
     }
     
@@ -63,16 +63,7 @@ class MovieViewModel: ApiClient, IViewModel {
         else {
             return movieModel.count
         }
-    }
-   
-//    var cellForRow: [MovieResult] {
-//        if isActive {
-//            return filteredData
-//        }
-//        else {
-//            return movieModel
-//        }
-//    }
+    }   
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -110,38 +101,42 @@ class MovieViewModel: ApiClient, IViewModel {
         
     }
     
-    func getSearchMovies(searchKey: String) {
-     
-        let endpoint = Endpoint.movie_search(searchKey)
-        let request = endpoint.request
-        #if DEBUG
-        print(request)
-        #endif
-        
-        self.isLoading = true
-        fetch(with: request, decode: { json -> MovieModel? in
-            guard let feedResult = json as?  MovieModel else { return  nil }
-            return feedResult
-        }, completion: { [weak self] response in
-            guard let self = self else { return }
-            self.isLoading = false
-            switch response {
-            case .success(let successResponse):
-                self.filterModel.append(contentsOf: successResponse.results)
-                self.filterData(searchKey: searchKey)
-            case .failure(let error):
-                self.alertMessage = error.localizedDescription
-                #if DEBUG
-                print("Data Fetch Failed")
-                #endif
-            }
-        })                
+    func getSearchMovies(searchKey: String) {             
+        if !searchKey.isEmpty {
+            self.isActive = true
+            let endpoint = Endpoint.movie_search(searchKey)
+            let request = endpoint.request
+            #if DEBUG
+            print(request)
+            #endif
+            
+            self.isLoading = true
+            fetch(with: request, decode: { json -> MovieModel? in
+                guard let feedResult = json as?  MovieModel else { return  nil }
+                return feedResult
+            }, completion: { [weak self] response in
+                guard let self = self else { return }
+                self.isLoading = false
+                switch response {
+                case .success(let successResponse):
+                    self.filterModel.append(contentsOf: successResponse.results)
+                    self.filterData(searchKey: searchKey)
+                case .failure(let error):
+                    self.alertMessage = error.localizedDescription
+                    #if DEBUG
+                    print("Data Fetch Failed")
+                    #endif
+                }
+            })
+        } else {
+            self.isActive = false
+        }
     }
     
     func getCellModel(at indexPath: IndexPath) -> [MovieResult] {
         return movieModel
     }
-        
+    
     func userPressed(at indexPath: IndexPath ){
         let movie = self.movieModel[indexPath.row]
         let filteredMovie = self.filteredData[indexPath.row]
@@ -161,8 +156,6 @@ class MovieViewModel: ApiClient, IViewModel {
                 self.alertMessage = "Movie detail was not found"
             }
         }
-        
-       
     }
     
     private func filterData(searchKey: String) {
@@ -170,11 +163,12 @@ class MovieViewModel: ApiClient, IViewModel {
             return (model.title!.lowercased().contains(searchKey.lowercased()))
         })
         
-        if self.filteredData.count == 0 {
+        if self.filteredData.isEmpty {
             self.isActive = false
         }
         else {
             self.isActive = true
         }
     }
+    
 }
