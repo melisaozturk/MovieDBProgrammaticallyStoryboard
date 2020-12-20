@@ -30,7 +30,8 @@ class DetailViewController: UIViewController {
     var movieID: Int?
     lazy var layout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+        layout.scrollDirection = .horizontal        
+        layout.minimumInteritemSpacing = 10
         return layout
     }()
     
@@ -141,7 +142,7 @@ class DetailViewController: UIViewController {
         collectionView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 20).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
-        collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
     
@@ -172,15 +173,15 @@ class DetailViewController: UIViewController {
             self.imageViewMovie.kf.setImage(with: url)
             self.labelTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
             self.labelOriginalTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
-            self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "MovieFor: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
+            self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "Movie for: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
             self.labelStatus.text = self.viewModel.movieDetailModel!.status != nil ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
             self.labelRuntime.text = self.viewModel.movieDetailModel!.runtime != nil ? ("Runtime: \(String(self.viewModel.movieDetailModel!.runtime!)) dk") : ""
             self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity ?? 0.0))" : ""
-            self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "VoteCount: \(String(self.viewModel.movieDetailModel!.voteCount ?? 0))" : ""
-            self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("VoteAverage: \(String(self.viewModel.movieDetailModel!.voteAverage ?? 0.0))") : ""
+            self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "Vote Count: \(String(self.viewModel.movieDetailModel!.voteCount ?? 0))" : ""
+            self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("Vote Average: \(String(self.viewModel.movieDetailModel!.voteAverage ?? 0.0))") : ""
             self.labelOriginalLanguage.text = "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage ?? "")"
             self.labelReleaseDate.text = self.viewModel.movieDetailModel!.releaseDate != nil ? "Release Date: \(self.viewModel.movieDetailModel!.releaseDate!)" : ""
-            self.textViewOverView.text = self.viewModel.movieDetailModel!.overview != nil ? "OverView: \(self.viewModel.movieDetailModel!.overview!)" : ""
+            self.textViewOverView.text = self.viewModel.movieDetailModel!.overview != nil ? "Overview: \(self.viewModel.movieDetailModel!.overview!)" : ""
 
             var itemString: String = ""
             if let spokenLanguages = self.viewModel.movieDetailModel!.spokenLanguages{
@@ -250,6 +251,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.castCell, for: indexPath) as! CastCell
         cell.cellResultModel = self.viewModel.movieCreditsModel[indexPath.row]
+        
         return cell
     }
     

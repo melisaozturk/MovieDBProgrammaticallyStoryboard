@@ -46,10 +46,11 @@ class CastCell: UICollectionViewCell {
         //                movieImageView constraints
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
-        movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
-        movieImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 12).isActive = true        
+//        movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        movieImageView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        movieImageView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        movieImageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
     }
     
