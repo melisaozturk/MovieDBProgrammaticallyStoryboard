@@ -140,12 +140,11 @@
 		1E7B94A2258E0A680087FC44 /* YemeksepetiMovieDB */ = {
 			isa = PBXGroup;
 			children = (
-				1E7B951A258E0C780087FC44 /* Model */,
+				1E91290F258F72B100C7F5A6 /* View */,
 				1E7B9514258E0C590087FC44 /* ViewModel */,
-				1E7B9501258E0BCF0087FC44 /* ApiClient */,
+				1E7B951A258E0C780087FC44 /* Model */,
+				1E7B9501258E0BCF0087FC44 /* Service */,
 				1E7B94EA258E0B3C0087FC44 /* Common */,
-				1E7B94E9258E0B170087FC44 /* ViewController */,
-				1E7B94E0258E0AE60087FC44 /* Cell */,
 				1E7B94DF258E0ADE0087FC44 /* Resources */,
 				1E7B94AE258E0A6C0087FC44 /* LaunchScreen.storyboard */,
 				1E7B94B1258E0A6C0087FC44 /* Info.plist */,
@@ -207,14 +206,14 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		1E7B9501258E0BCF0087FC44 /* ApiClient */ = {
+		1E7B9501258E0BCF0087FC44 /* Service */ = {
 			isa = PBXGroup;
 			children = (
 				1E7B9502258E0BDB0087FC44 /* ApiClient.swift */,
 				1E7B950A258E0BF00087FC44 /* BaseEndpoint.swift */,
 				1E7B950F258E0C050087FC44 /* Endpoint.swift */,
 			);
-			path = ApiClient;
+			path = Service;
 			sourceTree = "<group>";
 		};
 		1E7B9514258E0C590087FC44 /* ViewModel */ = {
@@ -235,6 +234,15 @@
 				1EAB6D5D258EA6ED009C2609 /* MovieCreditsModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		1E91290F258F72B100C7F5A6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1E7B94E9258E0B170087FC44 /* ViewController */,
+				1E7B94E0258E0AE60087FC44 /* Cell */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		2045464483CCE3147902B074 /* Frameworks */ = {
