@@ -114,80 +114,30 @@ class DetailViewController: UIViewController {
 
         
         let stackViewStatus = UIStackView()
-        stackViewStatus.axis = .horizontal
+        stackViewStatus.axis = .vertical
         stackViewStatus.alignment = .leading
         stackViewStatus.distribution = .equalSpacing
         stackViewStatus.contentMode = .scaleToFill
         containerView.addSubview(stackViewStatus)
 
+        stackViewStatus.addArrangedSubview(labelTitle)
+        stackViewStatus.addArrangedSubview(labelOriginalTitle)
         stackViewStatus.addArrangedSubview(labelRuntime)
         stackViewStatus.addArrangedSubview(labelPopularity)
-
+        stackViewStatus.addArrangedSubview(labelAdult)
+        stackViewStatus.addArrangedSubview(labelGenre)
+        stackViewStatus.addArrangedSubview(labelStatus)
+        stackViewStatus.addArrangedSubview(labelGenre)
+        
         stackViewStatus.translatesAutoresizingMaskIntoConstraints = false
-        stackViewStatus.topAnchor.constraint(equalTo: labelOriginalTitle.bottomAnchor, constant: 10).isActive = true
-        stackViewStatus.leadingAnchor.constraint(equalTo: labelTitle.leadingAnchor).isActive = true
-        stackViewStatus.trailingAnchor.constraint(equalTo: labelTitle.trailingAnchor).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        stackView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-//
-//
-//        let stackView = UIStackView()
-//        stackView.axis = .horizontal
-//        stackView.alignment = .leading // .leading .firstBaseline .center .trailing .lastBaseline
-//        stackView.distribution = .equalSpacing // .fillEqually .fillProportionally .equalSpacing .equalCentering
-//        stackView.contentMode = .scaleToFill
-//        containerView.addSubview(stackView)
-//
-//        stackView.addSubview(labelGenre)
-//        stackView.addSubview(labelAdult)
-//
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.topAnchor.constraint(equalTo: stackViewStatus.bottomAnchor, constant: 10).isActive = true
-//        stackView.leadingAnchor.constraint(equalTo: stackViewStatus.leadingAnchor).isActive = true
-//        stackView.trailingAnchor.constraint(equalTo: stackViewStatus.trailingAnchor).isActive = true
-////        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-////        stackView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-//
-//
-//        let stackViewLanguage = UIStackView()
-//        stackViewLanguage.axis = .horizontal
-//        stackViewLanguage.alignment = .leading
-//        stackViewLanguage.distribution = .equalSpacing
-//        stackViewLanguage.contentMode = .scaleToFill
-//        containerView.addSubview(stackViewLanguage)
-//
-//        stackViewLanguage.addSubview(labelOriginalLanguage)
-//        stackViewLanguage.addSubview(labelSpokenLanguages)
-//
-//        stackViewLanguage.translatesAutoresizingMaskIntoConstraints = false
-//        stackViewLanguage.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10).isActive = true
-//        stackViewLanguage.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-//        stackViewLanguage.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-////        stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-////        stackViewLanguage.heightAnchor.constraint(equalToConstant: 100).isActive = true
-//
-//        let stackViewRelease = UIStackView()
-//        stackViewRelease.axis = .horizontal
-//        stackViewRelease.alignment = .leading
-//        stackViewRelease.distribution = .equalSpacing
-//        stackViewRelease.contentMode = .scaleToFill
-//        containerView.addSubview(stackViewRelease)
-//
-//        stackViewRelease.addSubview(labelStatus)
-//        stackViewRelease.addSubview(labelReleaseDate)
-//
-//        stackViewRelease.translatesAutoresizingMaskIntoConstraints = false
-//        stackViewRelease.topAnchor.constraint(equalTo: stackViewLanguage.bottomAnchor, constant: 10).isActive = true
-//        stackViewRelease.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-//        stackViewRelease.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-////        stackViewRelease.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-////        stackViewRelease.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        stackViewStatus.topAnchor.constraint(equalTo: labelOriginalTitle.bottomAnchor, constant: 20).isActive = true
+        stackViewStatus.leadingAnchor.constraint(equalTo: labelOriginalTitle.leadingAnchor).isActive = true
+        stackViewStatus.trailingAnchor.constraint(equalTo: labelOriginalTitle.trailingAnchor).isActive = true
         
-        
-//        textViewOverView.translatesAutoresizingMaskIntoConstraints = false
-//        textViewOverView.topAnchor.constraint(equalTo: labelOriginalTitle.bottomAnchor, constant: 10).isActive = true
-//        textViewOverView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-//        textViewOverView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 40).isActive = true
+        textViewOverView.translatesAutoresizingMaskIntoConstraints = false
+        textViewOverView.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
+        textViewOverView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+        textViewOverView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
 //        textViewOverView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
     }
     
@@ -218,8 +168,8 @@ class DetailViewController: UIViewController {
             self.imageViewMovie.kf.setImage(with: url)
             self.labelTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
             self.labelOriginalTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
-            self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "MovieFor: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue))" : ""
-            self.labelGenre.text =  "Genre: \(self.viewModel.movieDetailModel!.genres != nil ? (self.viewModel.movieDetailModel!.genres![0].name ?? "") : "")"
+            self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "MovieFor: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
+            self.labelGenre.text = self.viewModel.movieDetailModel!.genres != nil ? "Genre: \(self.viewModel.movieDetailModel!.genres![0].name ?? "")" : ""
             self.labelStatus.text = self.viewModel.movieDetailModel!.status != nil ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
             self.labelRuntime.text = self.viewModel.movieDetailModel!.runtime != nil ? ("Runtime: \(String(self.viewModel.movieDetailModel!.runtime!)) dk") : ""
             self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity ?? 0.0))" : ""
