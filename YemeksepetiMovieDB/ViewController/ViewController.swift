@@ -44,7 +44,8 @@ class ViewController: UIViewController {
        
     private func configureSearchBar() {
 //        searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
-//        searchBar.delegate = self
+        self.searchBar.delegate = self
+        
     }
     
     private func configuteTableView() {
@@ -65,7 +66,6 @@ class ViewController: UIViewController {
         searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor).isActive = true
@@ -87,8 +87,7 @@ class ViewController: UIViewController {
         viewModel.updateLoadingStatusHandler = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                let isLoading = self.viewModel.isLoading
-                if isLoading {
+                if self.viewModel.isLoading {
                     UIUtil.shared().showLoading(view: self.view)
                 }else {
                     UIUtil.shared().removeLoading(view: self.view)
@@ -116,7 +115,12 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell , for: indexPath) as! MovieCell
         cell.selectionStyle = .none
-        cell.cellResultModel = viewModel.popularModel[indexPath.row]
+            if self.viewModel.isActive {
+                cell.cellResultModel = self.viewModel.filteredData[indexPath.row]
+            } else {
+                cell.cellResultModel = self.viewModel.movieModel[indexPath.row]
+            }
+        
         return cell
     }
     
@@ -133,8 +137,44 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             detailvc.movieID = self.viewModel.movieID
         }
     }
-    
-    
 }
 
-
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+         if searchText.count > 2 {
+            
+            viewModel.showAlertHandler = { [weak self] in
+                guard let self = self else { return }
+                if let message = self.viewModel.alertMessage {
+                    UIUtil.shared().showMessage(viewController: self, message: message)
+                }
+            }
+            
+            viewModel.updateLoadingStatusHandler = { [weak self] in
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    if self.viewModel.isLoading {
+                        UIUtil.shared().showLoading(view: self.view)
+                    }else {
+                        UIUtil.shared().removeLoading(view: self.view)
+                    }
+                }
+            }
+//            veri silindiğinde status != isActive yap table ı reload et
+//            viewModel.updateFilterStatus = {[weak self] in
+//                guard let self = self else { return }
+//                if !self.viewModel.isActive {
+//                    self.tableView.reloadData()
+////                    self.filteredData.count = 0
+//                }
+//            }
+            
+            viewModel.updateUIHandler = { [weak self] in
+                guard let self = self else { return }
+                self.tableView.reloadData()
+            }
+            
+            self.viewModel.getSearchMovies(searchKey: searchText)
+         }
+    }
+}

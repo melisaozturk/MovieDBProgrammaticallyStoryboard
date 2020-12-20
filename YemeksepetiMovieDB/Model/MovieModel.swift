@@ -1,5 +1,5 @@
 //
-//  PopularMovieModel.swift
+//  MovieModel.swift
 //  MovieDBYemeksepeti
 //
 //  Created by melisa öztürk on 18.12.2020.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct PopularMovieModel: Decodable {
+struct MovieModel: Decodable {
     let page, totalResults, totalPages: Int
-    let results: [PopularResult]
+    let results: [MovieResult]
     
     private enum CodingKeys: String, CodingKey {
         case page
@@ -19,7 +19,7 @@ struct PopularMovieModel: Decodable {
     }
 }
 
-struct PopularResult: Decodable {
+struct MovieResult: Decodable {
     let popularity: Double?
     let voteCount: Int?
     let video: Bool?

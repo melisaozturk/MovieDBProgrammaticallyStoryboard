@@ -7,20 +7,38 @@
 
 import Foundation
 
-class MovieViewModel: ApiClient, IViewModel {    
+class MovieViewModel: ApiClient, IViewModel {
+        
     
     var session: URLSession
     
     var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
-
-    var popularModel: [PopularResult] = [PopularResult]() {
+    
+    var updateFilterStatus: (()->())?
+    
+    var movieID: Int?
+    var filteredData = [MovieResult]()
+    
+    var movieModel: [MovieResult] = [MovieResult]() {
         didSet {
             self.updateUIHandler?()
         }
     }
-
+ 
+    var filterModel: [MovieResult] = [MovieResult]() {
+        didSet {
+            self.updateUIHandler?()
+        }
+    }
+    
+    var isActive: Bool = false {
+        didSet {
+            self.updateFilterStatus?()
+        }
+    }
+    
     var isLoading: Bool = false {
         didSet {
             self.updateLoadingStatusHandler?()
@@ -34,10 +52,13 @@ class MovieViewModel: ApiClient, IViewModel {
     }
     
     var numberOfCells: Int {
-        return popularModel.count
+        if isActive {
+            return filteredData.count
+        }
+        else {
+            return movieModel.count
+        }
     }
-    
-    var movieID: Int?
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -56,15 +77,15 @@ class MovieViewModel: ApiClient, IViewModel {
         #endif
         
         self.isLoading = true
-        fetch(with: request, decode: { json -> PopularMovieModel? in
-            guard let feedResult = json as? PopularMovieModel else { return  nil }
+        fetch(with: request, decode: { json -> MovieModel? in
+            guard let feedResult = json as? MovieModel else { return  nil }
             return feedResult
         }, completion: { [weak self] response in
             guard let self = self else { return }
             self.isLoading = false
             switch response {
             case .success(let successResponse):
-                self.popularModel.append(contentsOf: successResponse.results)
+                self.movieModel.append(contentsOf: successResponse.results)
             case .failure(let error):
                 self.alertMessage = error.localizedDescription
                 #if DEBUG
@@ -75,12 +96,40 @@ class MovieViewModel: ApiClient, IViewModel {
         
     }
     
-    func getCellModel(at indexPath: IndexPath) -> [PopularResult] {
-        return popularModel
+    func getSearchMovies(searchKey: String) {
+     
+        let endpoint = Endpoint.movie_search(searchKey)
+        let request = endpoint.request
+        #if DEBUG
+        print(request)
+        #endif
+        
+        self.isLoading = true
+        fetch(with: request, decode: { json -> MovieModel? in
+            guard let feedResult = json as?  MovieModel else { return  nil }
+            return feedResult
+        }, completion: { [weak self] response in
+            guard let self = self else { return }
+            self.isLoading = false
+            switch response {
+            case .success(let successResponse):
+                self.filterModel.append(contentsOf: successResponse.results)
+                self.filterData(searchKey: searchKey)
+            case .failure(let error):
+                self.alertMessage = error.localizedDescription
+                #if DEBUG
+                print("Data Fetch Failed")
+                #endif
+            }
+        })                
+    }
+    
+    func getCellModel(at indexPath: IndexPath) -> [MovieResult] {
+        return movieModel
     }
         
     func userPressed(at indexPath: IndexPath ){
-        let movie = self.popularModel[indexPath.row]
+        let movie = self.movieModel[indexPath.row]
         
         if movie.id != nil  {
             self.movieID = movie.id
@@ -90,4 +139,16 @@ class MovieViewModel: ApiClient, IViewModel {
         }
     }
     
+    private func filterData(searchKey: String) {
+        self.filteredData = self.filterModel.filter({(model: MovieResult) -> Bool in
+            return (model.title!.lowercased().contains(searchKey.lowercased()))
+        })
+        
+        if self.filteredData.count == 0 {
+            self.isActive = false
+        }
+        else {
+            self.isActive = true
+        }
+    }
 }

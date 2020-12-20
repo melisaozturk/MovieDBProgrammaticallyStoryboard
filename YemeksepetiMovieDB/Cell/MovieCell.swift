@@ -14,11 +14,11 @@ class MovieCell: UITableViewCell {
     private var subtitleTextView = UITextView()
     private var movieImageView = UIImageView()
     
-    var cellResultModel : PopularResult? {
+    var cellResultModel : MovieResult? {
         didSet {
             titleLabel.text = cellResultModel?.title
             subtitleTextView.text = cellResultModel?.overview
-            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(cellResultModel!.posterPath!)")
+            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(cellResultModel!.posterPath ?? "")")
             movieImageView.kf.setImage(with: url)
         }
     }
