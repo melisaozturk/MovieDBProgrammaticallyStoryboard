@@ -14,7 +14,7 @@ class MovieCell: UITableViewCell {
     private var subtitleTextView = UITextView()
     private var movieImageView = UIImageView()
     
-    var cellResultModel : MovieResult? {
+    var cellResultModel: MovieResult? {
         didSet {
             titleLabel.text = cellResultModel?.title
             subtitleTextView.text = cellResultModel?.overview

@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum AdultTypeEnum: String {
+    case Adult = "Adult"
+    case AllAges = "AllAges"
+}
 
 struct MovieDetailModel: Decodable {
     let adult : Bool?
@@ -105,7 +109,6 @@ struct ProductionCountry : Decodable {
 }
 
 struct Genre : Decodable {
-    
     let id : Int?
     let name : String?
     
