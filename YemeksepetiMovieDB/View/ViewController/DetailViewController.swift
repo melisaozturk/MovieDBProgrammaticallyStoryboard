@@ -171,17 +171,18 @@ class DetailViewController: UIViewController {
             guard let self = self else { return }
             let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel!.posterPath ?? "")")
             self.imageViewMovie.kf.setImage(with: url)
-            self.labelTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
-            self.labelOriginalTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
+            
+            self.labelTitle.text = (self.viewModel.movieDetailModel!.title != nil && !self.viewModel.movieDetailModel!.title!.isEmpty) ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
+            self.labelOriginalTitle.text = (self.viewModel.movieDetailModel!.title != nil && !self.viewModel.movieDetailModel!.title!.isEmpty) ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
             self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "Movie for: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
-            self.labelStatus.text = self.viewModel.movieDetailModel!.status != nil ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
+            self.labelStatus.text = (self.viewModel.movieDetailModel!.status != nil && !self.viewModel.movieDetailModel!.status!.isEmpty) ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
             self.labelRuntime.text = self.viewModel.movieDetailModel!.runtime != nil ? ("Runtime: \(String(self.viewModel.movieDetailModel!.runtime!)) dk") : ""
             self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity ?? 0.0))" : ""
             self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "Vote Count: \(String(self.viewModel.movieDetailModel!.voteCount ?? 0))" : ""
             self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("Vote Average: \(String(self.viewModel.movieDetailModel!.voteAverage ?? 0.0))") : ""
-            self.labelOriginalLanguage.text = "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage ?? "")"
-            self.labelReleaseDate.text = self.viewModel.movieDetailModel!.releaseDate != nil ? "Release Date: \(self.viewModel.movieDetailModel!.releaseDate!)" : ""
-            self.textViewOverView.text = self.viewModel.movieDetailModel!.overview != nil ? "Overview: \(self.viewModel.movieDetailModel!.overview!)" : ""
+            self.labelOriginalLanguage.text = (self.viewModel.movieDetailModel!.originalLanguage != nil && !self.viewModel.movieDetailModel!.originalLanguage!.isEmpty) ? "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage ?? "")" : ""
+            self.labelReleaseDate.text = (self.viewModel.movieDetailModel!.releaseDate != nil && !self.viewModel.movieDetailModel!.releaseDate!.isEmpty) ? "Release Date: \(self.viewModel.movieDetailModel!.releaseDate!)" : ""
+            self.textViewOverView.text = (self.viewModel.movieDetailModel!.overview != nil && !self.viewModel.movieDetailModel!.overview!.isEmpty) ? "Overview: \(self.viewModel.movieDetailModel!.overview!)" : ""
 
             var itemString: String = ""
             if let spokenLanguages = self.viewModel.movieDetailModel!.spokenLanguages{
@@ -204,7 +205,7 @@ class DetailViewController: UIViewController {
                         itemString.append("-")
                     }
                 }
-                self.labelProductionCompanies.text = "Production Companies: \(itemString)"
+                self.labelProductionCompanies.text = !itemString.isEmpty ? "Production Companies: \(itemString)" : ""
                 
             }
             
@@ -216,7 +217,7 @@ class DetailViewController: UIViewController {
                         itemString.append("-")
                     }
                 }
-                self.labelProductionCountries.text = "Production Countries: \(itemString)"
+                self.labelProductionCountries.text = !itemString.isEmpty ? "Production Countries: \(itemString)" : ""
             }
             if let genres = self.viewModel.movieDetailModel!.genres {
                 itemString.removeAll()
@@ -226,7 +227,7 @@ class DetailViewController: UIViewController {
                         itemString.append("-")
                     }
                 }
-                self.labelGenre.text = "Genres: \(itemString)"
+                self.labelGenre.text = !itemString.isEmpty ? "Genres: \(itemString)" : ""
             }
                         
         }

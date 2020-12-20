@@ -31,12 +31,6 @@ class MovieViewModel: ApiClient, IViewModel {
         }
     }
     
-    var filterModel: [MovieResult] = [MovieResult]() {
-        didSet {
-            self.updateUIHandler?()
-        }
-    }
-    
     var isActive: Bool = false {
         didSet {
             self.updateUIHandler?()
@@ -118,7 +112,7 @@ class MovieViewModel: ApiClient, IViewModel {
                 self.isLoading = false
                 switch response {
                 case .success(let successResponse):
-                    self.filterModel.append(contentsOf: successResponse.results)
+                    self.movieModel.append(contentsOf: successResponse.results)
                     self.filterData(searchKey: searchKey)
                 case .failure(_):
                     self.alertMessage = "Search data was not found."
@@ -158,7 +152,7 @@ class MovieViewModel: ApiClient, IViewModel {
     }
     
     private func filterData(searchKey: String) {
-        self.filteredData = self.filterModel.filter({(model: MovieResult) -> Bool in
+        self.filteredData = self.movieModel.filter({(model: MovieResult) -> Bool in
             return (model.title!.lowercased().contains(searchKey.lowercased()))
         })
         

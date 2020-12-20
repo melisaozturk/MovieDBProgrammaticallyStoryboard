@@ -44,5 +44,16 @@
       <ContextState
          contextName = "MovieCell.cellResultModel.didset:MovieCell.swift">
       </ContextState>
+      <ContextState
+         contextName = "closure #3 in DetailViewController.updateUI():DetailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.movieDetailModel.overview">
+            </PersistentString>
+            <PersistentString
+               value = "self.viewModel.movieDetailModel">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
