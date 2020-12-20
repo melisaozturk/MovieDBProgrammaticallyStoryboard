@@ -67,8 +67,8 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             switch response {
             case .success(let successResponse):
                 self.movieDetailModel = successResponse
-            case .failure(let error):
-                self.alertMessage = error.localizedDescription
+            case .failure(_):
+                self.alertMessage = "Sonuç bulunamadı."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
@@ -94,8 +94,8 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             switch response {
             case .success(let successResponse):
                 self.movieCreditsModel = successResponse.cast
-            case .failure(let error):
-                self.alertMessage = error.localizedDescription
+            case .failure(_):
+                self.alertMessage = "Sonuç bulunamadı."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif

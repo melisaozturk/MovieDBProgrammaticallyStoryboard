@@ -18,7 +18,7 @@ class DetailViewController: UIViewController {
     lazy var viewModel: MovieDetailViewModel = {
         return MovieDetailViewModel()
     }()
-        
+    
     private let scrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.backgroundColor = .white
@@ -34,7 +34,6 @@ class DetailViewController: UIViewController {
     
     private func configureController() {
         self.view.backgroundColor = .white
-        
         
         titleLabel.numberOfLines = 0
         
@@ -74,17 +73,17 @@ class DetailViewController: UIViewController {
             }
         }
         
-                viewModel.updateLoadingStatusHandler = { [weak self] in
-                    guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        let isLoading = self.viewModel.isLoading
-                        if isLoading {
-                            UIUtil.shared().showLoading(view: self.view)
-                        }else {
-                            UIUtil.shared().removeLoading(view: self.view)
-                        }
-                    }
+        viewModel.updateLoadingStatusHandler = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                let isLoading = self.viewModel.isLoading
+                if isLoading {
+                    UIUtil.shared().showLoading(view: self.view)
+                }else {
+                    UIUtil.shared().removeLoading(view: self.view)
                 }
+            }
+        }
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
@@ -92,16 +91,16 @@ class DetailViewController: UIViewController {
             self.movieImageView.kf.setImage(with: url)
             self.titleLabel.text = self.viewModel.movieDetailModel!.title
         }
-
+        
         // cast'i göstermek için collection vb oluştur
-//        viewModel.updateUIHandlerCredits = { [weak self] in
-//            guard let self = self else { return }
-//            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieCreditsModel.posterPath!)")
-//            self.movieImageView.kf.setImage(with: url)
-//            self.titleLabel.text = self.viewModel.movieCreditsModel!.title
-//        }
+        //        viewModel.updateUIHandlerCredits = { [weak self] in
+        //            guard let self = self else { return }
+        //            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieCreditsModel.posterPath!)")
+        //            self.movieImageView.kf.setImage(with: url)
+        //            self.titleLabel.text = self.viewModel.movieCreditsModel!.title
+        //        }
         
         viewModel.getMovieDetailData(id: self.movieID!)
-//        viewModel.getMovieCreditsData(id: self.movieID!)
+        //        viewModel.getMovieCreditsData(id: self.movieID!)
     }
 }

@@ -8,8 +8,7 @@
 import Foundation
 
 class MovieViewModel: ApiClient, IViewModel {
-    
-    
+        
     var session: URLSession
     
     var updateUIHandler: (()->())?
@@ -91,8 +90,8 @@ class MovieViewModel: ApiClient, IViewModel {
             switch response {
             case .success(let successResponse):
                 self.movieModel.append(contentsOf: successResponse.results)
-            case .failure(let error):
-                self.alertMessage = error.localizedDescription
+            case .failure(_):
+                self.alertMessage = "Sonuç bulunamadı."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
@@ -121,8 +120,8 @@ class MovieViewModel: ApiClient, IViewModel {
                 case .success(let successResponse):
                     self.filterModel.append(contentsOf: successResponse.results)
                     self.filterData(searchKey: searchKey)
-                case .failure(let error):
-                    self.alertMessage = error.localizedDescription
+                case .failure(_):
+                    self.alertMessage = "Sonuç bulunamadı."
                     #if DEBUG
                     print("Data Fetch Failed")
                     #endif
