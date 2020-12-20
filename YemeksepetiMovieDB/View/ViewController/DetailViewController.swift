@@ -28,15 +28,22 @@ class DetailViewController: UIViewController {
     private var textViewOverView = UITextView()
     
     var movieID: Int?
-    let stackViewContainer = UIStackView()
+    
+    lazy var stackViewContainer: UIStackView = {
+        var stackViewContainer = UIStackView()
+        stackViewContainer.axis = .vertical
+        stackViewContainer.alignment = .leading
+        stackViewContainer.distribution = .equalSpacing
+        stackViewContainer.spacing = 10
+        stackViewContainer.contentMode = .scaleToFill
+        return stackViewContainer
+    }()
     
     lazy var viewModel: MovieDetailViewModel = {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize: CGSize = {
-        return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
-    }()
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 200)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -57,6 +64,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         configureController()
         configureConstraints()
+        configureCollectionView()
         updateUI()
     }
     
@@ -65,6 +73,8 @@ class DetailViewController: UIViewController {
         
         labelTitle.numberOfLines = 0
         labelOriginalTitle.numberOfLines = 0
+        labelProductionCompanies.numberOfLines = 0
+        labelProductionCountries.numberOfLines = 0
         
         scrollView.bounces = false
         
@@ -74,26 +84,23 @@ class DetailViewController: UIViewController {
         textViewOverView.textAlignment = .left
     }
     
+    private func configureCollectionView() {
+        
+    }
+    
     private func configureConstraints() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(containerView)
         
         containerView.addSubview(imageViewMovie)
-//        containerView.addSubview(textViewOverView)
         
         imageViewMovie.translatesAutoresizingMaskIntoConstraints = false
         imageViewMovie.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         imageViewMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
         imageViewMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         imageViewMovie.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-                
-        stackViewContainer.axis = .vertical
-        stackViewContainer.alignment = .leading
-        stackViewContainer.distribution = .equalSpacing
-        stackViewContainer.spacing = 10
-        stackViewContainer.contentMode = .scaleToFill
+        
         containerView.addSubview(stackViewContainer)
-
         
         stackViewContainer.addArrangedSubview(labelTitle)
         stackViewContainer.addArrangedSubview(labelOriginalTitle)
@@ -116,12 +123,7 @@ class DetailViewController: UIViewController {
         stackViewContainer.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 20).isActive = true
         stackViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
         stackViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
-        
-        self.contentSize = CGSize(width: self.view.frame.size.width, height: self.stackViewContainer.frame.maxY)
-//        textViewOverView.translatesAutoresizingMaskIntoConstraints = false
-//        textViewOverView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 10).isActive = true
-//        textViewOverView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-//        textViewOverView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+                
     }
     
     private func updateUI() {
@@ -152,21 +154,61 @@ class DetailViewController: UIViewController {
             self.labelTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
             self.labelOriginalTitle.text = self.viewModel.movieDetailModel!.title != nil ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
             self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "MovieFor: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
-            self.labelGenre.text = self.viewModel.movieDetailModel!.genres != nil ? "Genre: \(self.viewModel.movieDetailModel!.genres![0].name ?? "")" : ""
             self.labelStatus.text = self.viewModel.movieDetailModel!.status != nil ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
             self.labelRuntime.text = self.viewModel.movieDetailModel!.runtime != nil ? ("Runtime: \(String(self.viewModel.movieDetailModel!.runtime!)) dk") : ""
             self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity ?? 0.0))" : ""
             self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "VoteCount: \(String(self.viewModel.movieDetailModel!.voteCount ?? 0))" : ""
             self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("VoteAverage: \(String(self.viewModel.movieDetailModel!.voteAverage ?? 0.0))") : ""
             self.labelOriginalLanguage.text = "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage ?? "")"
-//     TODO       self.labelSpokenLanguages.text = String(format: "%@", self.viewModel.movieDetailModel!.spokenLanguages ?? "")
             self.labelReleaseDate.text = self.viewModel.movieDetailModel!.releaseDate != nil ? "Release Date: \(self.viewModel.movieDetailModel!.releaseDate!)" : ""
             self.textViewOverView.text = self.viewModel.movieDetailModel!.overview != nil ? "OverView: \(self.viewModel.movieDetailModel!.overview!)" : ""
+
+            var itemString: String = ""
+            if let spokenLanguages = self.viewModel.movieDetailModel!.spokenLanguages{
+                itemString.removeAll()
+                for (index, item) in spokenLanguages.enumerated()
+                {
+                    itemString.append(item.name!)
+                    if index < spokenLanguages.count - 1{
+                        itemString.append("-")
+                    }
+                }
+                self.labelSpokenLanguages.text = "Spoken Languages: \(itemString)"
+            }
             
-//  TODO          self.labelProductionCompanies.text = String(format: "%@", self.viewModel.movieDetailModel!.productionCompanies ?? "").map {"\($0)"}.reduce("") { $0 + $1 }
-//       TODO     self.labelProductionCountries.text = String(format: "%@", self.viewModel.movieDetailModel!.productionCountries ?? "").map {"\($0)"}.reduce("") { $0 + $1 }
+            if let productionCompanies = self.viewModel.movieDetailModel!.productionCompanies {
+                itemString.removeAll()
+                for (index, item) in productionCompanies.enumerated() {
+                    itemString.append(item.name!)
+                    if index < productionCompanies.count - 1{
+                        itemString.append("-")
+                    }
+                }
+                self.labelProductionCompanies.text = "Production Companies: \(itemString)"
+                
+            }
+            
+            if let productionCountries = self.viewModel.movieDetailModel!.productionCountries {
+                itemString.removeAll()
+                for (index, item) in productionCountries.enumerated() {
+                    itemString.append(item.name!)
+                    if index < productionCountries.count - 1 {
+                        itemString.append("-")
+                    }
+                }
+                self.labelProductionCountries.text = "Production Countries: \(itemString)"
+            }
+            if let genres = self.viewModel.movieDetailModel!.genres {
+                itemString.removeAll()
+                for (index, item) in genres.enumerated() {
+                    itemString.append(item.name!)                    
+                    if index < genres.count - 1 {
+                        itemString.append("-")
+                    }
+                }
+                self.labelGenre.text = "Genres: \(itemString)"
+            }
         }
-        
         // cast'i göstermek için collection vb oluştur
         //        viewModel.updateUIHandlerCredits = { [weak self] in
         //            guard let self = self else { return }
@@ -177,6 +219,12 @@ class DetailViewController: UIViewController {
         
         viewModel.getMovieDetailData(id: self.movieID!)
         //        viewModel.getMovieCreditsData(id: self.movieID!)
+    
     }
+}
+
+
+extension DetailViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
 }
 

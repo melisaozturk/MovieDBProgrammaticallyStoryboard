@@ -39,7 +39,7 @@ class MovieCell: UITableViewCell {
         
         movieImageView.layer.cornerRadius = 10
         movieImageView.clipsToBounds = true
-        movieImageView.contentMode = .scaleAspectFill
+        movieImageView.contentMode = .scaleAspectFit
 
         titleLabel.numberOfLines = 0
         titleLabel.adjustsFontSizeToFitWidth = true
