@@ -14,10 +14,10 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "contentSize"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "65E35CFD-5C9B-4EA2-8AC1-6A6208563410 - a49f8b231b28572d"
@@ -77,10 +77,10 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "contentSize"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -93,8 +93,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
             landmarkName = "viewModel"
             landmarkType = "24">
          </BreakpointContent>
@@ -173,10 +173,10 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
-            landmarkName = "updateUI()"
-            landmarkType = "7">
+            startingLineNumber = "130"
+            endingLineNumber = "130"
+            landmarkName = "contentSize"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

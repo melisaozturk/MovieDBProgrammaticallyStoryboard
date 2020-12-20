@@ -28,12 +28,15 @@ class DetailViewController: UIViewController {
     private var textViewOverView = UITextView()
     
     var movieID: Int?
+    let stackViewContainer = UIStackView()
     
     lazy var viewModel: MovieDetailViewModel = {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 300)
+    lazy var contentSize: CGSize = {
+        return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height)
+    }()
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -76,17 +79,17 @@ class DetailViewController: UIViewController {
         scrollView.addSubview(containerView)
         
         containerView.addSubview(imageViewMovie)
-        containerView.addSubview(textViewOverView)
+//        containerView.addSubview(textViewOverView)
         
         imageViewMovie.translatesAutoresizingMaskIntoConstraints = false
         imageViewMovie.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
         imageViewMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
         imageViewMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         imageViewMovie.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        
-        let stackViewContainer = UIStackView()
+                
         stackViewContainer.axis = .vertical
         stackViewContainer.alignment = .leading
+        stackViewContainer.distribution = .equalSpacing
         stackViewContainer.spacing = 10
         stackViewContainer.contentMode = .scaleToFill
         containerView.addSubview(stackViewContainer)
@@ -106,18 +109,19 @@ class DetailViewController: UIViewController {
         stackViewContainer.addArrangedSubview(labelVoteCount)
         stackViewContainer.addArrangedSubview(labelProductionCompanies)
         stackViewContainer.addArrangedSubview(labelProductionCountries)
-        
+        stackViewContainer.addArrangedSubview(textViewOverView)
+
         
         stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
         stackViewContainer.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 20).isActive = true
-        stackViewContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        stackViewContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
+        stackViewContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
+        stackViewContainer.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
         
-        
-        textViewOverView.translatesAutoresizingMaskIntoConstraints = false
-        textViewOverView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 10).isActive = true
-        textViewOverView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        textViewOverView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20).isActive = true
+        self.contentSize = CGSize(width: self.view.frame.size.width, height: self.stackViewContainer.frame.maxY)
+//        textViewOverView.translatesAutoresizingMaskIntoConstraints = false
+//        textViewOverView.topAnchor.constraint(equalTo: stackViewContainer.bottomAnchor, constant: 10).isActive = true
+//        textViewOverView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
+//        textViewOverView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20).isActive = true
     }
     
     private func updateUI() {
