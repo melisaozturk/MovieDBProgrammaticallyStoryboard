@@ -19,7 +19,12 @@ class MovieViewModel: ApiClient, IViewModel {
     var updateFilterStatus: (()->())?
     
     var movieID: Int?
-    var filteredData = [MovieResult]()
+    
+    var filteredData: [MovieResult] = [MovieResult]() {
+        didSet {
+            self.updateUIHandler?()
+        }
+    }
     
     var movieModel: [MovieResult] = [MovieResult]() {
         didSet {
@@ -59,6 +64,15 @@ class MovieViewModel: ApiClient, IViewModel {
             return movieModel.count
         }
     }
+   
+//    var cellForRow: [MovieResult] {
+//        if isActive {
+//            return filteredData
+//        }
+//        else {
+//            return movieModel
+//        }
+//    }
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -130,13 +144,25 @@ class MovieViewModel: ApiClient, IViewModel {
         
     func userPressed(at indexPath: IndexPath ){
         let movie = self.movieModel[indexPath.row]
+        let filteredMovie = self.filteredData[indexPath.row]
         
-        if movie.id != nil  {
-            self.movieID = movie.id
+        if self.isActive {
+            if filteredMovie.id != nil  {
+                self.movieID = filteredMovie.id
+            } else {
+                self.movieID = nil
+                self.alertMessage = "Movie detail was not found"
+            }
         } else {
-            self.movieID = nil
-            self.alertMessage = "Item detail was not found"
+            if movie.id != nil  {
+                self.movieID = movie.id
+            } else {
+                self.movieID = nil
+                self.alertMessage = "Movie detail was not found"
+            }
         }
+        
+       
     }
     
     private func filterData(searchKey: String) {

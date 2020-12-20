@@ -3,19 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "MovieViewModel.getCellModel(at:):MovieViewModel.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in MovieCell.cellModel.didset:MovieCell.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MovieCell.cellResultModel.didset:MovieCell.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MovieViewModel.getPopularData():MovieViewModel.swift">
+         contextName = "closure #2 in MovieViewModel.getSearchMovies(searchKey:):MovieViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.filterData">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "MovieCell.cellModel.didset:MovieCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieViewModel.getPopularData():MovieViewModel.swift">
       </ContextState>
       <ContextState
          contextName = "ViewController.tableView(_:numberOfRowsInSection:):ViewController.swift">
@@ -24,6 +23,26 @@
                value = "viewModel.numberOfCells">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MovieCell.cellModel.didset:MovieCell.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MovieViewModel.getCellModel(at:):MovieViewModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.tableView(_:cellForRowAt:):ViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.filteredData.count">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MovieCell.cellResultModel.didset:MovieCell.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

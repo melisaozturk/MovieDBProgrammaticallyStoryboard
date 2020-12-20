@@ -33,6 +33,7 @@ class ViewController: UIViewController {
     
     private func configureNavigation() {
         navigationItem.title = "Home"
+        
         //        navigationController?.navigationBar.isTranslucent = false
         
         //        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width - 32, height: view.frame.height))
@@ -41,9 +42,9 @@ class ViewController: UIViewController {
         //        titleLabel.font = UIFont.systemFont(ofSize: 20)
         //        navigationItem.titleView = titleLabel
     }
-       
+    
     private func configureSearchBar() {
-//        searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
+        //        searchBar.frame = CGRect(x: 0, y: 0, width: 200, height: 70)
         self.searchBar.delegate = self
         
     }
@@ -74,7 +75,7 @@ class ViewController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
     }
-        
+    
     private func updateUI() {
         
         viewModel.showAlertHandler = { [weak self] in
@@ -115,11 +116,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell , for: indexPath) as! MovieCell
         cell.selectionStyle = .none
-            if self.viewModel.isActive {
+                
+        if self.viewModel.isActive {
+            if indexPath.row < viewModel.numberOfCells{
                 cell.cellResultModel = self.viewModel.filteredData[indexPath.row]
-            } else {
-                cell.cellResultModel = self.viewModel.movieModel[indexPath.row]
             }
+        } else {
+            cell.cellResultModel = self.viewModel.movieModel[indexPath.row]
+        }
         
         return cell
     }
@@ -128,7 +132,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return 150
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
         self.viewModel.userPressed(at: indexPath)
         
         let detailvc = DetailViewController()
@@ -141,7 +145,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-         if searchText.count > 2 {
+        if searchText.count > 2 {
             
             viewModel.showAlertHandler = { [weak self] in
                 guard let self = self else { return }
@@ -160,14 +164,6 @@ extension ViewController: UISearchBarDelegate {
                     }
                 }
             }
-//            veri silindiğinde status != isActive yap table ı reload et
-//            viewModel.updateFilterStatus = {[weak self] in
-//                guard let self = self else { return }
-//                if !self.viewModel.isActive {
-//                    self.tableView.reloadData()
-////                    self.filteredData.count = 0
-//                }
-//            }
             
             viewModel.updateUIHandler = { [weak self] in
                 guard let self = self else { return }
@@ -175,6 +171,6 @@ extension ViewController: UISearchBarDelegate {
             }
             
             self.viewModel.getSearchMovies(searchKey: searchText)
-         }
+        }
     }
 }

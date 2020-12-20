@@ -201,18 +201,10 @@
 		1E7B94EA258E0B3C0087FC44 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				1E7B94F3258E0B570087FC44 /* Loading */,
 				1E7B94EB258E0B450087FC44 /* UIUtil.swift */,
 				1EAB6D31258E39B3009C2609 /* Loading.swift */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		1E7B94F3258E0B570087FC44 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Loading;
 			sourceTree = "<group>";
 		};
 		1E7B9501258E0BCF0087FC44 /* ApiClient */ = {
