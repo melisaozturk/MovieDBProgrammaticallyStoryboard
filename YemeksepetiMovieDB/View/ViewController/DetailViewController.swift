@@ -43,7 +43,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 200)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 250)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -82,6 +82,7 @@ class DetailViewController: UIViewController {
         textViewOverView.isScrollEnabled = false
         textViewOverView.isSelectable = false
         textViewOverView.textAlignment = .left
+        textViewOverView.font = UIFont(name: ".SFUI-Regular", size: 17)
     }
     
     private func configureCollectionView() {
@@ -96,7 +97,7 @@ class DetailViewController: UIViewController {
         
         imageViewMovie.translatesAutoresizingMaskIntoConstraints = false
         imageViewMovie.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0).isActive = true
-        imageViewMovie.heightAnchor.constraint(equalToConstant: 400).isActive = true
+        imageViewMovie.heightAnchor.constraint(equalToConstant: 500).isActive = true
         imageViewMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
         imageViewMovie.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
         

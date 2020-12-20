@@ -14,8 +14,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "updateUI()"
             landmarkType = "7">
             <Locations>
@@ -157,8 +157,8 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "updateUI()"
             landmarkType = "7">
          </BreakpointContent>
@@ -173,9 +173,25 @@
             filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "updateUI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4320C0AD-E43B-4AFF-B851-EB981F04781A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YemeksepetiMovieDB/View/ViewController/DetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "configureConstraints()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
