@@ -167,10 +167,10 @@ class MovieDetailViewModel: ApiClient, IViewModel {
                 list[14].value = itemString
             }
             
-            if !self.movieDetailModel.posterPath.isEmpty {
-                list[15].text = ""
-                list[15].value = self.movieDetailModel.posterPath
-            }
+//            if !self.movieDetailModel.posterPath.isEmpty {
+//                list[15].text = ""
+//                list[15].value = "http://image.tmdb.org/t/p/w500//\(self.movieDetailModel.posterPath)"
+//            }
         }
         return list
     }()
