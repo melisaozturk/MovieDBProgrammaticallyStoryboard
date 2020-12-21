@@ -27,7 +27,6 @@ enum APIError: Swift.Error {
 
 
 protocol ApiClient {
-    var session: URLSession? { get }
     func fetch<T: Decodable>(with request: URLRequest, decode: @escaping (Decodable) -> T?, completion: @escaping (Result<T, APIError>) -> Void)
     
 }
@@ -36,8 +35,8 @@ extension ApiClient {
     typealias JSONTaskCompletionHandler = (Decodable?, APIError?) -> Void
     
     private func decodingTask<T: Decodable>(with request: URLRequest, decodingType: T.Type, completionHandler completion: @escaping JSONTaskCompletionHandler) -> URLSessionDataTask {
-        
-        let task = session!.dataTask(with: request) { data, response, error in
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: request) { data, response, error in
             
             guard let httpResponse = response as? HTTPURLResponse else {
                 completion(nil, .requestFailed)

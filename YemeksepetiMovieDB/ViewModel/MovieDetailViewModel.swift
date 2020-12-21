@@ -8,16 +8,14 @@
 import Foundation
 
 class MovieDetailViewModel: ApiClient, IViewModel {
-    
-    var session: URLSession?
-        
+            
     var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
     
     var updateUIHandlerCredits: (()->())?
 
-    private var id: Int?
+    var id: Int?
     
     var movieDetailModel: MovieDetailModel! {
         didSet {
@@ -47,16 +45,11 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         return movieCreditsModel.count
     }
     
-    init(configuration: URLSessionConfiguration, id: Int?) {
-        self.session = URLSession(configuration: configuration)
+    init() { }
+    
+    init(id: Int) {
         self.id = id
     }
-    
-//    convenience init() {
-//        self.init(configuration: .default, id: 0)
-//    }
-    
-    
     
     func getMovieDetailData() {
         

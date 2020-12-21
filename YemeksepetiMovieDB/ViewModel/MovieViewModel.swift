@@ -8,8 +8,6 @@
 import Foundation
 
 class MovieViewModel: ApiClient, IViewModel {
-        
-    var session: URLSession?
     
     var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
@@ -58,18 +56,12 @@ class MovieViewModel: ApiClient, IViewModel {
         }
     }   
     
-    init(id: Int) {
-        self.id = id
-    }
-    
-    init(configuration: URLSessionConfiguration) {
-        self.session = URLSession(configuration: configuration)
-    }
-    
-    convenience init() {
-        self.init(configuration: .default)
-    }
-    
+//    init() { }
+//    
+//    init(id: Int) {
+//        self.id = id
+//    }
+//    
     func getPopularData() {
         
         let endpoint = Endpoint.movie_popular

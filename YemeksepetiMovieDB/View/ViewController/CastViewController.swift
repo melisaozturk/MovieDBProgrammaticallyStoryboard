@@ -9,8 +9,6 @@ import UIKit
 
 class CastViewController: UIViewController {
     
-    var castID: Int?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureController()

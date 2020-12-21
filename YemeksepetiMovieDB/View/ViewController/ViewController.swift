@@ -131,7 +131,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
         self.viewModel.userPressed(at: indexPath)
         
-        let detailVC = DetailViewController(viewModel: MovieDetailViewModel(configuration: .default, id: indexPath.row))
+        let detailVC = DetailViewController(viewModel: MovieDetailViewModel(id: self.viewModel.id!))
         if let navigation = self.navigationController {
             navigation.pushViewController(detailVC, animated: true)
         }

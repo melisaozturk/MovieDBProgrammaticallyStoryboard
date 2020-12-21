@@ -27,7 +27,6 @@ class DetailViewController: UIViewController {
     private var labelProductionCountries = UILabel()
     private var textViewOverView = UITextView()
     
-    var movieID: Int?
     lazy var layout: UICollectionViewFlowLayout = {
         var layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal        
@@ -48,7 +47,7 @@ class DetailViewController: UIViewController {
     }()
     
     lazy var viewModel: MovieDetailViewModel = {
-        return MovieDetailViewModel(configuration: .default, id: 0)
+        return MovieDetailViewModel(id: self.viewModel.id!)
     }()
     
     lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 800)
@@ -281,7 +280,6 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let castVC = CastViewController()
         if let navigation = self.navigationController {
             navigation.pushViewController(castVC, animated: true)
-//            castVC.castID = self.viewModel.id
         }
     }
     
