@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         configureUI()
         configuteTableView()
         configureController()
-        updateUI()
+        initUI()
         
     }
     
@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         
     }
     
-    private func updateUI() {
+    private func initUI() {
         
         viewModel.showAlertHandler = { [weak self] in
             guard let self = self else { return }

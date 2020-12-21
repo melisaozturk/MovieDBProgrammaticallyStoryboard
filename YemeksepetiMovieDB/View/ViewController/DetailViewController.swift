@@ -51,7 +51,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel()
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 500)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 800)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -73,7 +73,7 @@ class DetailViewController: UIViewController {
         configureController()
         configureConstraints()
         configureCollectionView()
-        updateUI()
+        initUI()
     }
     
     private func configureController() {
@@ -146,7 +146,7 @@ class DetailViewController: UIViewController {
         collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
     }
     
-    private func updateUI() {
+    private func initUI() {
         
         viewModel.showAlertHandler = { [weak self] in
             guard let self = self else { return }
@@ -173,15 +173,25 @@ class DetailViewController: UIViewController {
             self.imageViewMovie.kf.setImage(with: url)
             
             self.labelTitle.text = (self.viewModel.movieDetailModel!.title != nil && !self.viewModel.movieDetailModel!.title!.isEmpty) ? "Title: \(self.viewModel.movieDetailModel!.title!)" : ""
+            
             self.labelOriginalTitle.text = (self.viewModel.movieDetailModel!.title != nil && !self.viewModel.movieDetailModel!.title!.isEmpty) ? "Original Title: \(self.viewModel.movieDetailModel!.title!)" : ""
+            
             self.labelAdult.text = self.viewModel.movieDetailModel!.adult != nil ? "Movie for: \((self.viewModel.movieDetailModel!.adult!) ? AdultTypeEnum.Adult.rawValue : AdultTypeEnum.AllAges.rawValue)" : ""
+            
             self.labelStatus.text = (self.viewModel.movieDetailModel!.status != nil && !self.viewModel.movieDetailModel!.status!.isEmpty) ? "Status: \(self.viewModel.movieDetailModel!.status!)" : ""
+            
             self.labelRuntime.text = self.viewModel.movieDetailModel!.runtime != nil ? ("Runtime: \(String(self.viewModel.movieDetailModel!.runtime!)) dk") : ""
-            self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity ?? 0.0))" : ""
-            self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "Vote Count: \(String(self.viewModel.movieDetailModel!.voteCount ?? 0))" : ""
-            self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("Vote Average: \(String(self.viewModel.movieDetailModel!.voteAverage ?? 0.0))") : ""
-            self.labelOriginalLanguage.text = (self.viewModel.movieDetailModel!.originalLanguage != nil && !self.viewModel.movieDetailModel!.originalLanguage!.isEmpty) ? "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage ?? "")" : ""
+            
+            self.labelPopularity.text = self.viewModel.movieDetailModel!.popularity != nil ? "Popularity: \(String(self.viewModel.movieDetailModel!.popularity!))" : ""
+            
+            self.labelVoteCount.text = self.viewModel.movieDetailModel!.voteCount != nil ? "Vote Count: \(String(self.viewModel.movieDetailModel!.voteCount!))" : ""
+            
+            self.labelVoteAverage.text = self.viewModel.movieDetailModel!.voteAverage != nil ? ("Vote Average: \(String(self.viewModel.movieDetailModel!.voteAverage!))") : ""
+            
+            self.labelOriginalLanguage.text = (self.viewModel.movieDetailModel!.originalLanguage != nil && !self.viewModel.movieDetailModel!.originalLanguage!.isEmpty) ? "Original Language: \(self.viewModel.movieDetailModel!.originalLanguage!)" : ""
+            
             self.labelReleaseDate.text = (self.viewModel.movieDetailModel!.releaseDate != nil && !self.viewModel.movieDetailModel!.releaseDate!.isEmpty) ? "Release Date: \(self.viewModel.movieDetailModel!.releaseDate!)" : ""
+            
             self.textViewOverView.text = (self.viewModel.movieDetailModel!.overview != nil && !self.viewModel.movieDetailModel!.overview!.isEmpty) ? "Overview: \(self.viewModel.movieDetailModel!.overview!)" : ""
 
             var itemString: String = ""
