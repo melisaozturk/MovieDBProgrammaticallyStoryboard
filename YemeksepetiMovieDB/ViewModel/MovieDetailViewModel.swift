@@ -244,7 +244,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         })
     }
     
-    func userPressedCast(at indexPath: IndexPath ){
+    func userPressedCast(at indexPath: IndexPath) {
         let cast = self.movieCreditsModel[indexPath.row]
         if cast.id != nil  {
             self.id = cast.id
