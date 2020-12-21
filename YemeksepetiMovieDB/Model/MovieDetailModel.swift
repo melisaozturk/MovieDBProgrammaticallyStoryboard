@@ -13,30 +13,30 @@ enum AdultTypeEnum: String {
 }
 
 struct MovieDetailModel: Decodable {
-    let adult : Bool?
-    let backdropPath : String?
-    let budget : Int?
-    let genres : [Genre]?
-    let homepage : String?
-    let id : Int?
-    let imdbId : String?
-    let originalLanguage : String?
-    let originalTitle : String?
-    let overview : String?
-    let popularity : Float?
-    let posterPath : String?
-    let productionCompanies : [ProductionCompany]?
-    let productionCountries : [ProductionCountry]?
-    let releaseDate : String?
-    let revenue : Int?
-    let runtime : Int?
-    let spokenLanguages : [SpokenLanguage]?
-    let status : String?
-    let tagline : String?
-    let title : String?
-    let video : Bool?
-    let voteAverage : Float?
-    let voteCount : Int?
+    var adult : Bool = false
+    var backdropPath : String = ""
+    var budget : Int = 0
+    var genres : [Genre] = [Genre]()
+    var homepage : String = ""
+    var id : Int = 0
+    var imdbId : String = ""
+    var originalLanguage : String = ""
+    var originalTitle : String = ""
+    var overview : String = ""
+    var popularity : Float = 0.0
+    var posterPath : String = ""
+    var productionCompanies : [ProductionCompany] = [ProductionCompany]()
+    var productionCountries : [ProductionCountry] = [ProductionCountry]()
+    var releaseDate : String = ""
+    var revenue : Int = 0
+    var runtime : Int = 0
+    var spokenLanguages : [SpokenLanguage] = [SpokenLanguage]()
+    var status : String = ""
+    var tagline : String = ""
+    var title : String = ""
+    var video : Bool = false
+    var voteAverage : Float = 0.0
+    var voteCount : Int = 0
     
     private enum CodingKeys: String, CodingKey {
         case adult = "adult"

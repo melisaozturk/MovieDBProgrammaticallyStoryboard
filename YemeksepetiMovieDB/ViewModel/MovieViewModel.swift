@@ -54,14 +54,8 @@ class MovieViewModel: ApiClient, IViewModel {
         else {
             return movieModel.count
         }
-    }   
+    }
     
-//    init() { }
-//    
-//    init(id: Int) {
-//        self.id = id
-//    }
-//    
     func getPopularData() {
         
         let endpoint = Endpoint.movie_popular

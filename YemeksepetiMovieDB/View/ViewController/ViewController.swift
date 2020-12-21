@@ -10,6 +10,7 @@ import UIKit
 struct Cells {
     static let movieCell = "MovieCell"
     static let castCell = "CastCell"
+    static let detailCell = "DetailCell"
 }
 
 class ViewController: UIViewController {

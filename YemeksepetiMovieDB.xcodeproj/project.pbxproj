@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1AE0BC292E87449799E52D46 /* Pods_YemeksepetiMovieDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DB9A2E41474CF49266B7646 /* Pods_YemeksepetiMovieDB.framework */; };
+		1E706ED825911B2D00D18EC1 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E706ED725911B2D00D18EC1 /* DetailCell.swift */; };
 		1E7B94A4258E0A680087FC44 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B94A3258E0A680087FC44 /* AppDelegate.swift */; };
 		1E7B94A6258E0A680087FC44 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B94A5258E0A680087FC44 /* SceneDelegate.swift */; };
 		1E7B94A8258E0A680087FC44 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E7B94A7258E0A680087FC44 /* ViewController.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E706ED725911B2D00D18EC1 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		1E7B94A0258E0A680087FC44 /* YemeksepetiMovieDB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YemeksepetiMovieDB.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E7B94A3258E0A680087FC44 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1E7B94A5258E0A680087FC44 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 			children = (
 				1E7B94E1258E0AF30087FC44 /* MovieCell.swift */,
 				1E912940258FD84F00C7F5A6 /* CastCell.swift */,
+				1E706ED725911B2D00D18EC1 /* DetailCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				1EAB6D5E258EA6ED009C2609 /* MovieCreditsModel.swift in Sources */,
 				1EAB6D32258E39B3009C2609 /* Loading.swift in Sources */,
 				1E7B94A6258E0A680087FC44 /* SceneDelegate.swift in Sources */,
+				1E706ED825911B2D00D18EC1 /* DetailCell.swift in Sources */,
 				1EAB6D48258E879A009C2609 /* MovieDetailModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

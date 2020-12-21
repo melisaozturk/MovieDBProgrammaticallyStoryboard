@@ -25,6 +25,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DetailViewController.tableView(_:numberOfRowsInSection:):DetailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "viewModel.numberOfDetailCells">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in MovieCell.cellModel.didset:MovieCell.swift">
       </ContextState>
       <ContextState
