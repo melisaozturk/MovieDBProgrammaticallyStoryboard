@@ -48,7 +48,7 @@ class DetailViewController: UIViewController {
     }()
     
     lazy var viewModel: MovieDetailViewModel = {
-        return MovieDetailViewModel()
+        return MovieDetailViewModel(configuration: .default, id: 0)
     }()
     
     lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 800)
@@ -74,6 +74,15 @@ class DetailViewController: UIViewController {
         configureConstraints()
         configureCollectionView()
         initUI()
+    }
+    
+    init(viewModel: MovieDetailViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureController() {
@@ -247,8 +256,8 @@ class DetailViewController: UIViewController {
             self.collectionView.reloadData()
         }
         
-        viewModel.getMovieDetailData(id: self.movieID!)
-        viewModel.getMovieCreditsData(id: self.movieID!)
+        viewModel.getMovieDetailData()
+        viewModel.getMovieCreditsData()
     
     }
 }
@@ -272,7 +281,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let castVC = CastViewController()
         if let navigation = self.navigationController {
             navigation.pushViewController(castVC, animated: true)
-            castVC.castID = self.viewModel.castID
+//            castVC.castID = self.viewModel.id
         }
     }
     

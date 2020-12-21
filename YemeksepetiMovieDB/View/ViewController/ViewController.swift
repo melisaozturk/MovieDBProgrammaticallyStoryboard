@@ -31,6 +31,15 @@ class ViewController: UIViewController {
         
     }
     
+    init(viewModel: MovieViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func configureUI() {
         navigationItem.title = "Home"
         self.searchBar.delegate = self
@@ -76,7 +85,7 @@ class ViewController: UIViewController {
         
         viewModel.updateLoadingStatusHandler = { [weak self] in
             guard let self = self else { return }
-                if self.viewModel.isLoading {
+            if self.viewModel.isLoading {
                     UIUtil.shared().showLoading(view: self.view)
                 }else {
                     UIUtil.shared().removeLoading(view: self.view)
@@ -122,10 +131,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {       
         self.viewModel.userPressed(at: indexPath)
         
-        let detailVC = DetailViewController()
+        let detailVC = DetailViewController(viewModel: MovieDetailViewModel(configuration: .default, id: indexPath.row))
         if let navigation = self.navigationController {
             navigation.pushViewController(detailVC, animated: true)
-            detailVC.movieID = self.viewModel.movieID
         }
     }
 }

@@ -8,7 +8,8 @@
 import Foundation
 
 protocol IViewModel {
-    var session: URLSession { get set }
+    
+    var session: URLSession? { get set }
     
     var updateUIHandler: (()->())? { get set }
     var showAlertHandler: (()->())? { get set }

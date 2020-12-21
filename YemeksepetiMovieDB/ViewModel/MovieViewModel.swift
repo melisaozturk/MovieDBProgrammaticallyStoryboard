@@ -9,7 +9,7 @@ import Foundation
 
 class MovieViewModel: ApiClient, IViewModel {
         
-    var session: URLSession
+    var session: URLSession?
     
     var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
@@ -17,7 +17,7 @@ class MovieViewModel: ApiClient, IViewModel {
     
     var updateFilterStatus: (()->())?
     
-    var movieID: Int?
+    var id: Int?
     
     var filteredData: [MovieResult] = [MovieResult]() {
         didSet {
@@ -57,6 +57,10 @@ class MovieViewModel: ApiClient, IViewModel {
             return movieModel.count
         }
     }   
+    
+    init(id: Int) {
+        self.id = id
+    }
     
     init(configuration: URLSessionConfiguration) {
         self.session = URLSession(configuration: configuration)
@@ -135,17 +139,17 @@ class MovieViewModel: ApiClient, IViewModel {
         if self.isActive {
             let filteredMovie = self.filteredData[indexPath.row]
             if filteredMovie.id != nil  {
-                self.movieID = filteredMovie.id
+                self.id = filteredMovie.id
             } else {
-                self.movieID = nil
+                self.id = nil
                 self.alertMessage = "Movie detail was not found"
             }
         } else {
             let movie = self.movieModel[indexPath.row]
             if movie.id != nil  {
-                self.movieID = movie.id
+                self.id = movie.id
             } else {
-                self.movieID = nil
+                self.id = nil
                 self.alertMessage = "Movie detail was not found"
             }
         }

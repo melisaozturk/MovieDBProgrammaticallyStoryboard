@@ -9,15 +9,16 @@ import Foundation
 
 class MovieDetailViewModel: ApiClient, IViewModel {
     
-    var session: URLSession
-    
+    var session: URLSession?
+        
     var updateUIHandler: (()->())?
     var showAlertHandler: (()->())?
     var updateLoadingStatusHandler: (()->())?
     
     var updateUIHandlerCredits: (()->())?
-    var castID: Int?
 
+    private var id: Int?
+    
     var movieDetailModel: MovieDetailModel! {
         didSet {
             self.updateUIHandler?()
@@ -45,18 +46,21 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     var numberOfCells: Int {
         return movieCreditsModel.count
     }
-                
-    init(configuration: URLSessionConfiguration) {
+    
+    init(configuration: URLSessionConfiguration, id: Int?) {
         self.session = URLSession(configuration: configuration)
+        self.id = id
     }
     
-    convenience init() {
-        self.init(configuration: .default)
-    }
+//    convenience init() {
+//        self.init(configuration: .default, id: 0)
+//    }
     
-    func getMovieDetailData(id: Int) {
+    
+    
+    func getMovieDetailData() {
         
-        let endpoint = Endpoint.movie_detail(id)
+        let endpoint = Endpoint.movie_detail(self.id!)
         let request = endpoint.request
         #if DEBUG
         print(request)
@@ -81,9 +85,9 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         })
     }
     
-    func getMovieCreditsData(id: Int) {
+    func getMovieCreditsData() {
         
-        let endpoint = Endpoint.movie_credits(id)
+        let endpoint = Endpoint.movie_credits(self.id!)
         let request = endpoint.request
         #if DEBUG
         print(request)
@@ -111,9 +115,9 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     func userPressedCast(at indexPath: IndexPath ){
         let cast = self.movieCreditsModel[indexPath.row]
         if cast.id != nil  {
-            self.castID = cast.id
+            self.id = cast.id
         } else {
-            self.castID = nil
+            self.id = nil
             self.alertMessage = "Cast detail was not found."
         }
     }
