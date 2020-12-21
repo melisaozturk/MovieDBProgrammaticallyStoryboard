@@ -237,7 +237,6 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             case .success(let successResponse):
                 self.movieCreditsModel = successResponse.cast!
             case .failure(_):
-                self.alertMessage = "Cast data was not found."
                 #if DEBUG
                 print("Data Fetch Failed")
                 #endif
