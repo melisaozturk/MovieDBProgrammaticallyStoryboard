@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel(id: self.viewModel.id!)
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 400)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 800)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -71,6 +71,7 @@ class DetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = .white
         tableView.register(DetailCell.self, forCellReuseIdentifier: Cells.detailCell)
     }
@@ -170,7 +171,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
 //    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 60//UITableView.automaticDimension
     }
 }
 

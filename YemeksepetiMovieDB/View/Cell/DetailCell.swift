@@ -31,11 +31,8 @@ class DetailCell: UITableViewCell {
     }
     
     private func configureUI() {
-        labelValue.numberOfLines = 0
-        labelValue.adjustsFontSizeToFitWidth = true
-        
+        labelValue.numberOfLines = 0        
         labelText.numberOfLines = 0
-        labelText.adjustsFontSizeToFitWidth = true
     }
     
     private func configureConstraints() {
@@ -43,17 +40,16 @@ class DetailCell: UITableViewCell {
         addSubview(labelText)
         addSubview(labelValue)
         
-        labelText.translatesAutoresizingMaskIntoConstraints = false
-        labelText.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        labelText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        labelText.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10).isActive = true
-
         labelValue.translatesAutoresizingMaskIntoConstraints = false
         labelValue.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        labelValue.leadingAnchor.constraint(equalTo: labelText.trailingAnchor, constant: 10).isActive = true
         labelValue.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         labelValue.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10).isActive = true
-
+        
+        labelText.translatesAutoresizingMaskIntoConstraints = false
+        labelText.topAnchor.constraint(equalTo: labelValue.topAnchor).isActive = true
+        labelText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        labelText.trailingAnchor.constraint(equalTo: labelValue.leadingAnchor).isActive = true
+        labelText.bottomAnchor.constraint(equalTo: labelValue.bottomAnchor).isActive = true
     }
     
 }

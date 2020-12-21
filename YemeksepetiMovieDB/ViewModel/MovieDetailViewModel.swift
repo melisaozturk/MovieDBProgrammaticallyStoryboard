@@ -122,9 +122,9 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             list.value = String(self.movieDetailModel.releaseDate)
             listArray.append(list)
         }
-        
+
         if !self.movieDetailModel.genres.isEmpty {
-            //                itemString.removeAll()
+                            itemString.removeAll()
             for (index, item) in self.movieDetailModel.genres.enumerated() {
                 itemString.append(item.name!)
                 if index < self.movieDetailModel.genres.count - 1 {
@@ -137,7 +137,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
         }
         
         if !self.movieDetailModel!.spokenLanguages.isEmpty {
-            //            itemString.removeAll()
+                        itemString.removeAll()
             for (index, item) in self.movieDetailModel!.spokenLanguages.enumerated()
             {
                 itemString.append(item.name!)
@@ -149,9 +149,9 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             list.value = itemString
             listArray.append(list)
         }
-        
+
         if !self.movieDetailModel!.productionCompanies.isEmpty {
-            //            itemString.removeAll()
+                        itemString.removeAll()
             for (index, item) in self.movieDetailModel!.productionCompanies.enumerated() {
                 itemString.append(item.name!)
                 if index < self.movieDetailModel!.productionCompanies.count - 1{
