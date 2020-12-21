@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         return MovieDetailViewModel(id: self.viewModel.id!)
     }()
     
-    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 800)
+    lazy var contentSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height + 400)
     
     lazy var scrollView: UIScrollView = {
         let scroll = UIScrollView(frame: .zero)
@@ -86,30 +86,28 @@ class DetailViewController: UIViewController {
     private func configureConstraints() {
         self.view.addSubview(scrollView)
         scrollView.addSubview(containerView)
-        scrollView.addSubview(collectionView)
-        
+                        
         containerView.addSubview(imageViewMovie)
         containerView.addSubview(tableView)
+        containerView.addSubview(collectionView)
         
         imageViewMovie.translatesAutoresizingMaskIntoConstraints = false
         imageViewMovie.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageViewMovie.heightAnchor.constraint(equalToConstant: 500).isActive = true
         imageViewMovie.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         imageViewMovie.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        imageViewMovie.bottomAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: imageViewMovie.bottomAnchor, constant: 20).isActive = true
         tableView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true  //TODO -20 oldu mu
-//        tableView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor, constant: 20).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true //TODO -20 oldu mu
+        collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-//        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 200).isActive = true
     }
     
     private func initUI() {
@@ -162,7 +160,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.detailCell , for: indexPath) as! DetailCell
         cell.selectionStyle = .none
         
-        cell.cellResultModel = self.viewModel.list[indexPath.row]
+        cell.cellResultModel = self.viewModel.labelModel[indexPath.row]
         
         return cell
     }

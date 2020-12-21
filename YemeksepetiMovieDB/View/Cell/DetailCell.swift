@@ -13,16 +13,6 @@ class DetailCell: UITableViewCell {
     private var labelText = UILabel()
     private var labelValue = UILabel()
     
-    lazy var stackViewContainer: UIStackView = {
-        var stackViewContainer = UIStackView()
-        stackViewContainer.axis = .vertical
-        stackViewContainer.alignment = .leading
-        stackViewContainer.distribution = .fillProportionally
-        stackViewContainer.spacing = 10
-        stackViewContainer.contentMode = .scaleToFill
-        return stackViewContainer
-    }()
-    
     var cellResultModel: LabelModel? {
         didSet {
             labelText.text = cellResultModel!.text
@@ -49,16 +39,20 @@ class DetailCell: UITableViewCell {
     }
     
     private func configureConstraints() {
-        addSubview(stackViewContainer)
 
-        stackViewContainer.addArrangedSubview(labelText)
-        stackViewContainer.addArrangedSubview(labelValue)
+        addSubview(labelText)
+        addSubview(labelValue)
         
-        stackViewContainer.translatesAutoresizingMaskIntoConstraints = false
-        stackViewContainer.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        stackViewContainer.leadingAnchor.constraint(equalTo: trailingAnchor, constant: 10).isActive = true
-        stackViewContainer.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
-        stackViewContainer.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10).isActive = true
+        labelText.translatesAutoresizingMaskIntoConstraints = false
+        labelText.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        labelText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        labelText.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10).isActive = true
+
+        labelValue.translatesAutoresizingMaskIntoConstraints = false
+        labelValue.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        labelValue.leadingAnchor.constraint(equalTo: labelText.trailingAnchor, constant: 10).isActive = true
+        labelValue.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        labelValue.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10).isActive = true
 
     }
     
