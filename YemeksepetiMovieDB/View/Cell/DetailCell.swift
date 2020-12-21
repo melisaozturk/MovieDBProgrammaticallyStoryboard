@@ -31,8 +31,10 @@ class DetailCell: UITableViewCell {
     }
     
     private func configureUI() {
-        labelValue.numberOfLines = 0        
+        labelValue.numberOfLines = 0
+        labelValue.lineBreakMode = .byWordWrapping
         labelText.numberOfLines = 0
+        labelText.lineBreakMode = .byWordWrapping
     }
     
     private func configureConstraints() {
@@ -47,6 +49,7 @@ class DetailCell: UITableViewCell {
         
         labelText.translatesAutoresizingMaskIntoConstraints = false
         labelText.topAnchor.constraint(equalTo: labelValue.topAnchor).isActive = true
+        labelText.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 5/10).isActive = true
         labelText.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         labelText.trailingAnchor.constraint(equalTo: labelValue.leadingAnchor).isActive = true
         labelText.bottomAnchor.constraint(equalTo: labelValue.bottomAnchor).isActive = true

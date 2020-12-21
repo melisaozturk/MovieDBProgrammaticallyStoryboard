@@ -72,7 +72,7 @@ class DetailViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .white        
         tableView.register(DetailCell.self, forCellReuseIdentifier: Cells.detailCell)
     }
     
@@ -85,6 +85,9 @@ class DetailViewController: UIViewController {
     }
     
     private func configureConstraints() {
+                
+        containerView.heightAnchor.constraint(equalTo: self.scrollView.heightAnchor).priority = .defaultLow
+        
         self.view.addSubview(scrollView)
         scrollView.addSubview(containerView)
                         
@@ -166,12 +169,12 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 30
-//    }
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60//UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
 }
 

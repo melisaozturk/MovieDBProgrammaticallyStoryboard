@@ -49,9 +49,9 @@ class MovieCell: UITableViewCell {
         
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         movieImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12).isActive = true
+        movieImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         movieImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 12).isActive = true
+        movieImageView.widthAnchor.constraint(equalTo: movieImageView.heightAnchor, multiplier: 16/9, constant: 10).isActive = true
         
         //                titleLabel constraints
         
@@ -59,7 +59,7 @@ class MovieCell: UITableViewCell {
         titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: movieImageView.trailingAnchor, constant: 20).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         
     }
     
