@@ -63,7 +63,14 @@ class ViewController: UIViewController {
         searchBar.backgroundColor = .white
         
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 90).isActive = true
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.windows[0]
+            let topPadding = window.safeAreaInsets.top
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: self.navigationController!.navigationBar.frame.size.height + topPadding).isActive = true
+        } else {
+            searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: self.navigationController!.navigationBar.frame.size.height).isActive = true
+        }
+        
         searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
