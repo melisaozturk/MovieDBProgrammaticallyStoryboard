@@ -137,8 +137,7 @@ class DetailViewController: UIViewController {
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
-            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel.posterPath)") 
-            self.imageViewMovie.kf.setImage(with: url)
+            self.imageViewMovie.kf.setImage(with: self.viewModel.urlData)
             self.tableView.reloadData()
         }
         
@@ -187,7 +186,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.castCell, for: indexPath) as! CastCell
         
-        cell.cellResultModel = viewModel.returnCastData[indexPath.row] 
+        cell.cellResultModel = viewModel.returnCastData[indexPath.row]
         
         return cell
     }

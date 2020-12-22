@@ -19,7 +19,7 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     var updateLoadingStatusHandler: (()->())?
     
     var updateUIHandlerCredits: (()->())?
-    
+
     var id: Int?
     
     var movieDetailModel: MovieDetailModel! {
@@ -67,7 +67,16 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     var returnCastData: [MovieCast]  {
        return movieCreditsModel
     }
-           
+    
+    var urlData: URL?
+    var returnURL: URL? {
+        get {
+            return urlData
+        } set {
+            urlData = newValue
+        }
+    }
+    
     lazy var list: [LabelModel] = {
         var list = LabelModel()
         var listArray = [LabelModel]()
@@ -189,6 +198,8 @@ class MovieDetailViewModel: ApiClient, IViewModel {
             listArray.append(list)
         }
         
+        returnURL = URL(string: "http://image.tmdb.org/t/p/w500//\(self.movieDetailModel.posterPath)")!
+
         return listArray
     }()
     
