@@ -194,7 +194,7 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.viewModel.userPressedCast(at: indexPath)
         
-        let castVC = CastViewController()
+        let castVC = DetailViewController(viewModel: MovieDetailViewModel(id: self.viewModel.id!))
         if let navigation = self.navigationController {
             navigation.pushViewController(castVC, animated: true)
         }
