@@ -13,23 +13,19 @@ class Loading: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        xibSetup()
+        setup()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetup()
-    }
-    
-    private func xibSetup(){
-        
-        view.frame = UIScreen.main.bounds
-        view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
-        addSubview(view)
         setup()
     }
     
     private func setup() {
+        view.frame = UIScreen.main.bounds
+        view.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+        addSubview(view)
+        
         self.view.backgroundColor = .black
         self.view.alpha = 0.8
         

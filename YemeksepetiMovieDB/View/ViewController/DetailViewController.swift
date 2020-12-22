@@ -137,7 +137,7 @@ class DetailViewController: UIViewController {
         
         viewModel.updateUIHandler = { [weak self] in
             guard let self = self else { return }
-            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel.posterPath)") //URL i gönder viewmodel den
+            let url = URL(string: "http://image.tmdb.org/t/p/w500//\(self.viewModel.movieDetailModel.posterPath)") 
             self.imageViewMovie.kf.setImage(with: url)
             self.tableView.reloadData()
         }
