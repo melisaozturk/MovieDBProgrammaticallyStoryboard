@@ -56,6 +56,15 @@ class MovieViewModel: ApiClient, IViewModel {
         }
     }
     
+    var returnData: [MovieResult] {
+        if isActive {
+            return filteredData
+        }
+        else {
+            return movieModel
+        }
+    }
+        
     func getPopularData() {
         
         let endpoint = Endpoint.movie_popular

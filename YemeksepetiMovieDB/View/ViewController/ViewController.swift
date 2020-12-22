@@ -139,13 +139,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.movieCell , for: indexPath) as! MovieCell
         cell.selectionStyle = .none
                 
-        if self.viewModel.isActive {
-            if indexPath.row < viewModel.numberOfCells{
-                cell.cellResultModel = self.viewModel.filteredData[indexPath.row]
+            if indexPath.row < viewModel.numberOfCells {
+                cell.cellResultModel = viewModel.returnData[indexPath.row]
             }
-        } else {
-            cell.cellResultModel = self.viewModel.movieModel[indexPath.row]
-        }
         
         return cell
     }

@@ -164,7 +164,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.detailCell , for: indexPath) as! DetailCell
         cell.selectionStyle = .none
         
-        cell.cellResultModel = self.viewModel.labelModel[indexPath.row]
+        cell.cellResultModel = viewModel.returnData[indexPath.row]
         
         return cell
     }
@@ -186,7 +186,8 @@ extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.castCell, for: indexPath) as! CastCell
-        cell.cellResultModel = self.viewModel.movieCreditsModel[indexPath.row]
+        
+        cell.cellResultModel = viewModel.returnCastData[indexPath.row] 
         
         return cell
     }

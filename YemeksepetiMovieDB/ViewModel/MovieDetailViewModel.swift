@@ -59,7 +59,15 @@ class MovieDetailViewModel: ApiClient, IViewModel {
     var numberOfDetailCells: Int {
         return labelModel.count
     }
-    
+        
+    var returnData: [LabelModel] {
+       return labelModel
+    }
+   
+    var returnCastData: [MovieCast]  {
+       return movieCreditsModel
+    }
+           
     lazy var list: [LabelModel] = {
         var list = LabelModel()
         var listArray = [LabelModel]()
